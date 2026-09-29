@@ -16,30 +16,64 @@ const imagePath = (filename) => {
 // 共通の塗り方
 // -----------------------------------------------------
 
+// -----------------------------------------------------
+// 塗り方4種類
+// -----------------------------------------------------
+
 const coatingOptions = [
 
     {
-        label: "手に出して塗るタイプ（画像1付き）",
-        image: imagePath("image1.png")
+        label: "手で塗る",
+
+        description:
+            "チューブ式で、押して、手に出して塗る",
+
+        images: [
+            imagePath("image1-1.png"),
+            imagePath("image1-2.png")
+        ]
     },
 
-    {
-        label: "ローラーでコロコロ塗るタイプ（画像2付き）",
-        image: imagePath("image2.png")
-    },
 
     {
-        label: "筆・ブラシで塗るタイプ（画像3付き）",
-        image: imagePath("image3.png")
+        label: "ローラー",
+
+        description:
+            "本体に直接日焼け止めが付いていて、コロコロするだけで塗れる",
+
+        images: [
+            imagePath("image2-1.png"),
+            imagePath("image2-2.png")
+        ]
     },
 
+
     {
-        label: "スポンジでポンポン塗るタイプ（画像4付き）",
-        image: imagePath("image4.png")
+        label: "筆・ブラシ",
+
+        description:
+            "胴体を押すとブラシ部分に日焼け止めが出てきて、描くように塗れる",
+
+        images: [
+            imagePath("image3-1.png"),
+            imagePath("image3-2.png")
+        ]
+    },
+
+
+    {
+        label: "スポンジ",
+
+        description:
+            "星型の部分に日焼け止めが付いていて、ぽんぽんと凹むので、凹むたびに日焼け止めが出てきて、スタンプのように塗れる",
+
+        images: [
+            imagePath("image4-1.png"),
+            imagePath("image4-2.png")
+        ]
     }
 
 ];
-
 
 // =====================================================
 // 最初の質問
@@ -1073,37 +1107,83 @@ function renderQuestion() {
 
                 // 画像
 
-                if (option.image) {
+              // -------------------------
+// 画像2枚
+// -------------------------
 
-                    html += `
+if (
+    option.images &&
+    option.images.length > 0
+) {
 
-                        <img
-                            src="${option.image}"
-                            alt=""
-                            class="option-image"
-                            onerror="
-                                this.style.display='none'
-                            "
-                        >
+    html += `
 
-                    `;
+        <div class="option-images">
 
-                }
+    `;
+
+
+    option.images.forEach(
+        (image, imageIndex) => {
+
+            html += `
+
+                <img
+                    src="${image}"
+                    alt="${escapeAttribute(
+                        option.label
+                    )} ${imageIndex + 1}"
+                    class="option-image"
+                    onerror="
+                        this.style.display='none'
+                    "
+                >
+
+            `;
+
+        }
+    );
+
+
+    html += `
+
+        </div>
+
+    `;
+
+}
 
 
                 html += `
 
-                        <span class="option-text">
+    <div class="option-information">
 
-                            ${
-                                escapeHtml(
-                                    option.label
-                                )
-                            }
+        <span class="option-text">
 
-                        </span>
+            ${
+                escapeHtml(
+                    option.label
+                )
+            }
 
-                `;
+        </span>
+
+
+        ${
+            option.description
+                ? `
+                    <span class="option-description">
+                        ${escapeHtml(
+                            option.description
+                        )}
+                    </span>
+                `
+                : ""
+        }
+
+    </div>
+
+`;
 
 
                 // 順番バッジ
