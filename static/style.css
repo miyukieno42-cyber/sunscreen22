@@ -1,16 +1,18 @@
-/* =========================
-   基本設定
-========================= */
+/* ========================================
+   基本
+======================================== */
 
 * {
     box-sizing: border-box;
 }
 
+
 body {
     margin: 0;
+
     padding: 20px;
 
-    background: #f5f0ff;
+    background: #f6f1fb;
 
     color: #333;
 
@@ -25,17 +27,18 @@ body {
 }
 
 
-/* =========================
+/* ========================================
    アンケートカード
-========================= */
+======================================== */
 
 .survey-card {
     width: 100%;
+
     max-width: 720px;
 
     margin: 30px auto;
 
-    padding: 30px;
+    padding: 32px;
 
     background: white;
 
@@ -46,95 +49,133 @@ body {
 }
 
 
-/* =========================
+/* ========================================
    ヘッダー
-========================= */
+======================================== */
 
-.header h1 {
+.survey-header h1 {
     margin: 0 0 25px;
 
-    color: #6f42c1;
+    color: #7042a8;
 
     font-size: 28px;
+
     line-height: 1.5;
 }
 
 
-/* =========================
+/* ========================================
    プログレス
-========================= */
+======================================== */
 
 .progress-area {
-    margin-bottom: 30px;
+    margin-bottom: 35px;
 }
+
 
 .progress-text {
     margin-bottom: 8px;
 
-    color: #777;
+    color: #888;
 
     font-size: 13px;
 
     text-align: right;
 }
 
+
 .progress-bar {
     width: 100%;
+
     height: 8px;
 
     overflow: hidden;
 
-    background: #eee7fa;
+    background: #eee7f6;
 
     border-radius: 999px;
 }
 
+
 .progress-fill {
-    width: 20%;
+    width: 10%;
+
     height: 100%;
 
     background: #7b4bc4;
 
     border-radius: 999px;
 
-    transition: width 0.3s ease;
+    transition:
+        width 0.3s ease;
 }
 
 
-/* =========================
+/* ========================================
+   ①・②
+======================================== */
+
+.branch-label {
+    display: inline-flex;
+
+    width: 44px;
+
+    height: 44px;
+
+    align-items: center;
+
+    justify-content: center;
+
+    margin-bottom: 15px;
+
+    border-radius: 50%;
+
+    font-size: 20px;
+
+    font-weight: bold;
+}
+
+
+.branch-green {
+    background: #e8f5e8;
+
+    color: #4c9f4c;
+}
+
+
+.branch-orange {
+    background: #fff0df;
+
+    color: #e58b32;
+}
+
+
+/* ========================================
    質問
-========================= */
+======================================== */
 
 .question {
-    display: none;
-
-    animation: fadeIn 0.25s ease;
+    animation:
+        fadeIn 0.25s ease;
 }
 
-.question.active {
-    display: block;
-}
 
 @keyframes fadeIn {
+
     from {
         opacity: 0;
-        transform: translateY(8px);
+
+        transform:
+            translateY(8px);
     }
 
     to {
         opacity: 1;
-        transform: translateY(0);
+
+        transform:
+            translateY(0);
     }
-}
 
-
-.question-number {
-    margin-bottom: 8px;
-
-    color: #8b63c7;
-
-    font-size: 14px;
-    font-weight: bold;
 }
 
 
@@ -144,55 +185,26 @@ body {
     color: #333;
 
     font-size: 21px;
+
     line-height: 1.7;
 }
 
 
 .question-note {
-    margin-top: -10px;
-    margin-bottom: 20px;
+    margin:
+        -8px 0 20px;
 
     color: #888;
 
     font-size: 14px;
+
+    line-height: 1.7;
 }
 
 
-/* =========================
-   枝分かれラベル
-========================= */
-
-.branch-label {
-    display: inline-flex;
-
-    width: 38px;
-    height: 38px;
-
-    align-items: center;
-    justify-content: center;
-
-    margin-bottom: 15px;
-
-    border-radius: 50%;
-
-    font-size: 20px;
-    font-weight: bold;
-}
-
-.branch-label.green {
-    background: #e7f7e9;
-    color: #3c9b48;
-}
-
-.branch-label.red {
-    background: #fde8e8;
-    color: #d9534f;
-}
-
-
-/* =========================
+/* ========================================
    選択肢
-========================= */
+======================================== */
 
 .options {
     display: flex;
@@ -214,27 +226,29 @@ body {
 
     padding: 14px 18px;
 
-    background: #fff;
+    background: white;
 
-    border: 2px solid #e4dcf2;
+    border:
+        2px solid #e3d9ef;
 
-    border-radius: 14px;
+    border-radius: 15px;
 
     cursor: pointer;
 
     transition:
-        background 0.2s,
         border-color 0.2s,
+        background 0.2s,
         transform 0.15s;
 }
 
 
 .option-card:hover {
-    background: #faf7ff;
+    background: #faf7fd;
 
-    border-color: #a786d8;
+    border-color: #a786c9;
 
-    transform: translateY(-1px);
+    transform:
+        translateY(-1px);
 }
 
 
@@ -242,11 +256,13 @@ body {
     position: absolute;
 
     opacity: 0;
+
+    pointer-events: none;
 }
 
 
-.option-card span {
-    width: 100%;
+.option-text {
+    flex: 1;
 
     color: #444;
 
@@ -256,30 +272,138 @@ body {
 }
 
 
-/* 選択された状態 */
+/* 選択中 */
 
 .option-card:has(input:checked) {
-    background: #f1eaff;
+    background: #f1e9fa;
 
     border-color: #7b4bc4;
 }
 
 
-.option-card:has(input:checked)::after {
-    content: "✓";
+.option-card:has(input:checked)
+.option-text {
+    color: #65369c;
 
-    margin-left: auto;
+    font-weight: 600;
+}
 
-    color: #7b4bc4;
 
-    font-size: 22px;
+/* ========================================
+   画像付き選択肢
+======================================== */
+
+.option-card.has-image {
+    flex-direction: column;
+
+    justify-content: center;
+
+    gap: 10px;
+
+    padding: 18px;
+}
+
+
+.option-image {
+    display: block;
+
+    width: 160px;
+
+    height: 160px;
+
+    object-fit: contain;
+
+    border-radius: 12px;
+}
+
+
+.has-image .option-text {
+    text-align: center;
+}
+
+
+/* ========================================
+   順番バッジ
+======================================== */
+
+.rank-badge {
+    display: none;
+
+    width: 30px;
+
+    height: 30px;
+
+    flex-shrink: 0;
+
+    align-items: center;
+
+    justify-content: center;
+
+    margin-left: 10px;
+
+    background: #7b4bc4;
+
+    color: white;
+
+    border-radius: 50%;
+
+    font-size: 14px;
+
     font-weight: bold;
 }
 
 
-/* =========================
+.rank-badge.show {
+    display: flex;
+}
+
+
+/* ========================================
+   自由回答
+======================================== */
+
+.free-text,
+.other-text {
+    display: block;
+
+    width: 100%;
+
+    min-height: 130px;
+
+    margin-top: 18px;
+
+    padding: 15px;
+
+    background: white;
+
+    border:
+        2px solid #e3d9ef;
+
+    border-radius: 14px;
+
+    outline: none;
+
+    resize: vertical;
+
+    color: #333;
+
+    font-family: inherit;
+
+    font-size: 16px;
+
+    line-height: 1.6;
+}
+
+
+.free-text:focus,
+.other-text:focus {
+    border-color: #7b4bc4;
+}
+
+
+/* ========================================
    ボタン
-========================= */
+======================================== */
 
 .button-area {
     display: flex;
@@ -294,13 +418,12 @@ body {
 .next-button {
     min-height: 54px;
 
-    padding: 0 25px;
-
     border: none;
 
     border-radius: 14px;
 
     font-size: 16px;
+
     font-weight: bold;
 
     cursor: pointer;
@@ -310,7 +433,7 @@ body {
 .back-button {
     flex: 1;
 
-    background: #eee;
+    background: #eeeeee;
 
     color: #666;
 }
@@ -326,13 +449,20 @@ body {
 
 
 .next-button:hover {
-    background: #6836b0;
+    background: #6737ac;
 }
 
 
-/* =========================
+.next-button:disabled {
+    opacity: 0.6;
+
+    cursor: wait;
+}
+
+
+/* ========================================
    スマホ
-========================= */
+======================================== */
 
 @media (max-width: 600px) {
 
@@ -340,149 +470,55 @@ body {
         padding: 10px;
     }
 
+
     .survey-card {
         margin: 10px auto;
 
         padding: 22px 18px;
 
-        border-radius: 18px;
+        border-radius: 20px;
     }
 
-    .header h1 {
+
+    .survey-header h1 {
         font-size: 23px;
     }
+
 
     .question h2 {
         font-size: 19px;
     }
 
-    .option-card {
-        min-height: 55px;
 
-        padding: 12px 14px;
+    .option-card {
+        min-height: 56px;
+
+        padding: 13px 14px;
     }
 
-    .option-card span {
+
+    .option-text {
         font-size: 15px;
     }
+
+
+    .option-image {
+        width: 130px;
+
+        height: 130px;
+    }
+
 
     .button-area {
         position: sticky;
 
         bottom: 0;
 
+        z-index: 10;
+
         padding-top: 10px;
 
         background: white;
     }
-}
-/* =========================
-   Thank you ページ
-========================= */
 
-.thanks-card {
-    width: 100%;
-    max-width: 720px;
-
-    min-height: 500px;
-
-    margin: 30px auto;
-
-    padding: 50px 30px;
-
-    background: white;
-
-    border-radius: 24px;
-
-    box-shadow:
-        0 8px 30px rgba(80, 50, 120, 0.12);
-
-    display: flex;
-
-    flex-direction: column;
-
-    align-items: center;
-
-    justify-content: center;
-
-    text-align: center;
-}
-
-
-/* ハート */
-
-.thanks-icon {
-    font-size: 55px;
-
-    margin-bottom: 20px;
-}
-
-
-/* タイトル */
-
-.thanks-card h1 {
-    margin: 0 0 20px;
-
-    color: #7b4bc4;
-
-    font-size: 28px;
-
-    line-height: 1.5;
-}
-
-
-/* メッセージ */
-
-.thanks-message {
-    margin: 0;
-
-    color: #666;
-
-    font-size: 16px;
-
-    line-height: 1.9;
-}
-
-
-/* 名前・メール */
-
-.thanks-footer {
-    width: 100%;
-
-    margin-top: 80px;
-
-    padding-top: 20px;
-
-    border-top: 1px solid #eee7f5;
-
-    color: #777;
-
-    font-size: 14px;
-
-    line-height: 1.8;
-}
-
-
-.thanks-footer p {
-    margin: 3px 0;
-}
-
-
-/* スマホ */
-
-@media (max-width: 600px) {
-
-    .thanks-card {
-        min-height: 500px;
-
-        padding: 40px 20px;
-    }
-
-    .thanks-card h1 {
-        font-size: 24px;
-    }
-
-    .thanks-footer {
-        margin-top: 60px;
-    }
 }
