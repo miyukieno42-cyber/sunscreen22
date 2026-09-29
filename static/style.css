@@ -294,33 +294,167 @@ body {
 ======================================== */
 
 .option-card.has-image {
+
+    display: flex;
+
     flex-direction: column;
+
+    align-items: center;
 
     justify-content: center;
 
-    gap: 10px;
+    gap: 12px;
 
-    padding: 18px;
+    padding: 20px;
+}
+
+
+/* ----------------------------------------
+   画像2枚
+---------------------------------------- */
+
+.option-images {
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    gap: 12px;
+
+    width: 100%;
+
+    margin-bottom: 5px;
 }
 
 
 .option-image {
+
     display: block;
 
-    width: 160px;
+    width: 145px;
 
-    height: 160px;
+    height: 145px;
 
     object-fit: contain;
 
     border-radius: 12px;
+
+    background: #fafafa;
 }
 
 
-.has-image .option-text {
+/* ----------------------------------------
+   名前＋説明
+---------------------------------------- */
+
+.option-information {
+
+    display: flex;
+
+    flex-direction: column;
+
+    align-items: center;
+
+    width: 100%;
+
+    gap: 6px;
+
     text-align: center;
 }
 
+
+.option-information .option-text {
+
+    width: 100%;
+
+    color: #444;
+
+    font-size: 18px;
+
+    font-weight: bold;
+
+    line-height: 1.5;
+}
+
+
+.option-description {
+
+    display: block;
+
+    width: 100%;
+
+    max-width: 520px;
+
+    color: #666;
+
+    font-size: 14px;
+
+    font-weight: normal;
+
+    line-height: 1.7;
+
+    text-align: left;
+}
+
+
+/* ----------------------------------------
+   選択された画像カード
+---------------------------------------- */
+
+.option-card:has(input:checked)
+.option-information .option-text {
+
+    color: #65369c;
+}
+
+
+.option-card:has(input:checked)
+.option-description {
+
+    color: #555;
+}
+
+
+/* ========================================
+   スマホ
+======================================== */
+
+@media (max-width: 600px) {
+
+    .option-images {
+
+        gap: 8px;
+
+    }
+
+
+    .option-image {
+
+        width: 120px;
+
+        height: 120px;
+
+    }
+
+
+    .option-information .option-text {
+
+        font-size: 17px;
+
+    }
+
+
+    .option-description {
+
+        font-size: 13px;
+
+        line-height: 1.7;
+
+    }
+
+}
 
 /* ========================================
    順番バッジ
