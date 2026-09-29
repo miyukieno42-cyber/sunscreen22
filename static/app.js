@@ -424,45 +424,9 @@ async function submitSurvey() {
         }
 
 
-        // 完了画面
 
-        document.body.innerHTML = `
-
-            <main class="survey-card">
-
-                <div style="
-                    text-align:center;
-                    padding:50px 10px;
-                ">
-
-                    <div style="
-                        font-size:50px;
-                        margin-bottom:20px;
-                    ">
-                        💜
-                    </div>
-
-                    <h1 style="
-                        color:#7b4bc4;
-                        margin-bottom:20px;
-                    ">
-                        ご回答ありがとうございました！
-                    </h1>
-
-                    <p style="
-                        line-height:1.8;
-                        color:#666;
-                    ">
-                        アンケートへのご協力、
-                        ありがとうございました。
-                    </p>
-
-                </div>
-
-            </main>
-
-        `;
-
+// 完了画面へ移動
+window.location.href = "/thanks";
 
     } catch (error) {
 
