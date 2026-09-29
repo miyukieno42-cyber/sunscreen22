@@ -2,6 +2,7 @@
 <html lang="ja">
 
 <head>
+
     <meta charset="UTF-8">
 
     <meta
@@ -15,6 +16,7 @@
         rel="stylesheet"
         href="{{ url_for('static', filename='style.css') }}"
     >
+
 </head>
 
 
@@ -22,29 +24,42 @@
 
 <main class="survey-card">
 
-    <!-- =====================
-         ヘッダー
-    ====================== -->
 
-    <header class="header">
+    <!-- =========================
+         ヘッダー
+    ========================== -->
+
+    <header class="survey-header">
 
         <h1>
             あなたについて教えてください
         </h1>
 
+
         <div class="progress-area">
 
             <div class="progress-text">
-                <span id="progress-number">1</span>
+
+                <span id="progress-current">
+                    1
+                </span>
+
                 /
-                <span id="progress-total">5</span>
+
+                <span id="progress-total">
+                    1
+                </span>
+
             </div>
 
+
             <div class="progress-bar">
+
                 <div
                     id="progress-fill"
                     class="progress-fill"
                 ></div>
+
             </div>
 
         </div>
@@ -52,449 +67,38 @@
     </header>
 
 
-    <!-- =====================
-         アンケート
-    ====================== -->
+    <!-- =========================
+         質問表示エリア
+    ========================== -->
 
-    <form id="survey-form">
+    <div id="question-container"></div>
 
 
-        <!-- =====================
-             Q1
-        ====================== -->
+    <!-- =========================
+         ボタン
+    ========================== -->
 
-        <section
-            class="question active"
-            data-question="q1"
+    <div class="button-area">
+
+        <button
+            type="button"
+            id="back-button"
+            class="back-button"
         >
-
-            <div class="question-number">
-                Q1
-            </div>
-
-            <h2>
-                現在子育てはしていますか？
-            </h2>
-
-            <p class="question-note">
-                一つ回答
-            </p>
+            戻る
+        </button>
 
 
-            <div class="options">
-
-                <label class="option-card">
-
-                    <input
-                        type="radio"
-                        name="q1"
-                        value="現在している"
-                    >
-
-                    <span>
-                        現在している
-                    </span>
-
-                </label>
-
-
-                <label class="option-card">
-
-                    <input
-                        type="radio"
-                        name="q1"
-                        value="過去にしていた"
-                    >
-
-                    <span>
-                        過去にしていた
-                    </span>
-
-                </label>
-
-
-                <label class="option-card">
-
-                    <input
-                        type="radio"
-                        name="q1"
-                        value="経験なし"
-                    >
-
-                    <span>
-                        経験なし
-                    </span>
-
-                </label>
-
-            </div>
-
-        </section>
-
-
-
-        <!-- =====================
-             ① 子どもの年齢
-        ====================== -->
-
-        <section
-            class="question branch-1"
-            data-question="q2"
+        <button
+            type="button"
+            id="next-button"
+            class="next-button"
         >
+            次へ
+        </button>
 
-            <div class="branch-label green">
-                ①
-            </div>
+    </div>
 
-            <div class="question-number">
-                Q2
-            </div>
-
-            <h2>
-                子どもの年齢
-            </h2>
-
-
-            <div class="options">
-
-                <label class="option-card">
-                    <input
-                        type="radio"
-                        name="q2"
-                        value="0〜2歳"
-                    >
-                    <span>0〜2歳</span>
-                </label>
-
-
-                <label class="option-card">
-                    <input
-                        type="radio"
-                        name="q2"
-                        value="3〜5歳（未就学）"
-                    >
-                    <span>3〜5歳（未就学）</span>
-                </label>
-
-
-                <label class="option-card">
-                    <input
-                        type="radio"
-                        name="q2"
-                        value="小学校低学年"
-                    >
-                    <span>小学校低学年</span>
-                </label>
-
-
-                <label class="option-card">
-                    <input
-                        type="radio"
-                        name="q2"
-                        value="小学校高学年"
-                    >
-                    <span>小学校高学年</span>
-                </label>
-
-
-                <label class="option-card">
-                    <input
-                        type="radio"
-                        name="q2"
-                        value="中学生"
-                    >
-                    <span>中学生</span>
-                </label>
-
-
-                <label class="option-card">
-                    <input
-                        type="radio"
-                        name="q2"
-                        value="高校生以上"
-                    >
-                    <span>高校生以上</span>
-                </label>
-
-
-                <label class="option-card">
-                    <input
-                        type="radio"
-                        name="q2"
-                        value="その他"
-                    >
-                    <span>その他</span>
-                </label>
-
-            </div>
-
-        </section>
-
-
-
-        <!-- =====================
-             ① 日焼け止め使用状況
-        ====================== -->
-
-        <section
-            class="question branch-1"
-            data-question="q3"
-        >
-
-            <div class="question-number">
-                Q3
-            </div>
-
-            <h2>
-                子どもは日焼け止めは使用していますか（使用していましたか）
-            </h2>
-
-
-            <div class="options">
-
-                <label class="option-card">
-                    <input
-                        type="radio"
-                        name="q3"
-                        value="よく使用している"
-                    >
-                    <span>よく使用している</span>
-                </label>
-
-
-                <label class="option-card">
-                    <input
-                        type="radio"
-                        name="q3"
-                        value="外出時などに使用している"
-                    >
-                    <span>外出時などに使用している</span>
-                </label>
-
-
-                <label class="option-card">
-                    <input
-                        type="radio"
-                        name="q3"
-                        value="以前は使用していたが、現在はあまり使用していない"
-                    >
-                    <span>
-                        以前は使用していたが、現在はあまり使用していない
-                    </span>
-                </label>
-
-
-                <label class="option-card">
-                    <input
-                        type="radio"
-                        name="q3"
-                        value="使用していない"
-                    >
-                    <span>使用していない</span>
-                </label>
-
-
-                <label class="option-card">
-                    <input
-                        type="radio"
-                        name="q3"
-                        value="覚えていない"
-                    >
-                    <span>覚えていない</span>
-                </label>
-
-            </div>
-
-        </section>
-
-
-
-        <!-- =====================
-             ① 塗り方
-        ====================== -->
-
-        <section
-            class="question branch-1"
-            data-question="q4"
-        >
-
-            <div class="question-number">
-                Q4
-            </div>
-
-            <h2>
-                お子さんが日焼け止めを塗るとき、現在どのように塗っていますか？
-            </h2>
-
-
-            <div class="options">
-
-                <label class="option-card">
-                    <input
-                        type="radio"
-                        name="q4"
-                        value="毎回、保護者が塗っている"
-                    >
-                    <span>
-                        毎回、保護者が塗っている
-                    </span>
-                </label>
-
-
-                <label class="option-card">
-                    <input
-                        type="radio"
-                        name="q4"
-                        value="基本的に保護者が塗り、一部は子どもが塗る"
-                    >
-                    <span>
-                        基本的に保護者が塗り、一部は子どもが塗る
-                    </span>
-                </label>
-
-
-                <label class="option-card">
-                    <input
-                        type="radio"
-                        name="q4"
-                        value="子どもが自分で塗っている"
-                    >
-                    <span>
-                        子どもが自分で塗っている
-                    </span>
-                </label>
-
-
-                <label class="option-card">
-                    <input
-                        type="radio"
-                        name="q4"
-                        value="日にによって違う"
-                    >
-                    <span>
-                        日によって違う
-                    </span>
-                </label>
-
-
-                <label class="option-card">
-                    <input
-                        type="radio"
-                        name="q4"
-                        value="その他"
-                    >
-                    <span>
-                        その他
-                    </span>
-                </label>
-
-            </div>
-
-        </section>
-
-
-
-        <!-- =====================
-             ① 自分で塗ることについて
-        ====================== -->
-
-        <section
-            class="question branch-1"
-            data-question="q5"
-        >
-
-            <div class="question-number">
-                Q5
-            </div>
-
-            <h2>
-                自分で日焼け止めを塗ることについてどう思いますか
-            </h2>
-
-
-            <div class="options">
-
-                <label class="option-card">
-
-                    <input
-                        type="radio"
-                        name="q5"
-                        value="できれば自分で塗ってほしい"
-                    >
-
-                    <span>
-                        できれば自分で塗ってほしい
-                    </span>
-
-                </label>
-
-            </div>
-
-        </section>
-
-
-
-        <!-- =====================
-             ②
-        ====================== -->
-
-        <!--
-        現在送られているPagesには
-        ②の質問内容がありません。
-
-        ②の質問が届いたら、
-        この部分に追加します。
-        -->
-
-        <section
-            id="branch2-placeholder"
-            class="question branch-2"
-        >
-
-            <div class="branch-label red">
-                ②
-            </div>
-
-            <h2>
-                ②の質問はここに入ります
-            </h2>
-
-            <p>
-                Pagesの②以降の内容を送ってもらったら、
-                ここを実際の質問に変更します。
-            </p>
-
-        </section>
-
-
-
-        <!-- =====================
-             ボタン
-        ====================== -->
-
-        <div class="button-area">
-
-            <button
-                type="button"
-                id="back-button"
-                class="back-button"
-            >
-                戻る
-            </button>
-
-
-            <button
-                type="button"
-                id="next-button"
-                class="next-button"
-            >
-                次へ
-            </button>
-
-        </div>
-
-
-    </form>
 
 </main>
 
