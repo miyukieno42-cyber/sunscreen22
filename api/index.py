@@ -48,6 +48,9 @@ def create_table():
 def index():
     return render_template("index.html")
 
+@app.route("/thanks")
+def thanks():
+    return render_template("thanks.html")
 
 # =========================
 # 回答送信
