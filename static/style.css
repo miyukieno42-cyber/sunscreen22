@@ -376,3 +376,113 @@ body {
         background: white;
     }
 }
+/* =========================
+   Thank you ページ
+========================= */
+
+.thanks-card {
+    width: 100%;
+    max-width: 720px;
+
+    min-height: 500px;
+
+    margin: 30px auto;
+
+    padding: 50px 30px;
+
+    background: white;
+
+    border-radius: 24px;
+
+    box-shadow:
+        0 8px 30px rgba(80, 50, 120, 0.12);
+
+    display: flex;
+
+    flex-direction: column;
+
+    align-items: center;
+
+    justify-content: center;
+
+    text-align: center;
+}
+
+
+/* ハート */
+
+.thanks-icon {
+    font-size: 55px;
+
+    margin-bottom: 20px;
+}
+
+
+/* タイトル */
+
+.thanks-card h1 {
+    margin: 0 0 20px;
+
+    color: #7b4bc4;
+
+    font-size: 28px;
+
+    line-height: 1.5;
+}
+
+
+/* メッセージ */
+
+.thanks-message {
+    margin: 0;
+
+    color: #666;
+
+    font-size: 16px;
+
+    line-height: 1.9;
+}
+
+
+/* 名前・メール */
+
+.thanks-footer {
+    width: 100%;
+
+    margin-top: 80px;
+
+    padding-top: 20px;
+
+    border-top: 1px solid #eee7f5;
+
+    color: #777;
+
+    font-size: 14px;
+
+    line-height: 1.8;
+}
+
+
+.thanks-footer p {
+    margin: 3px 0;
+}
+
+
+/* スマホ */
+
+@media (max-width: 600px) {
+
+    .thanks-card {
+        min-height: 500px;
+
+        padding: 40px 20px;
+    }
+
+    .thanks-card h1 {
+        font-size: 24px;
+    }
+
+    .thanks-footer {
+        margin-top: 60px;
+    }
+}
