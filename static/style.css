@@ -1,1 +1,378 @@
+/* =========================
+   基本設定
+========================= */
 
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    padding: 20px;
+
+    background: #f5f0ff;
+
+    color: #333;
+
+    font-family:
+        -apple-system,
+        BlinkMacSystemFont,
+        "Helvetica Neue",
+        "Hiragino Kaku Gothic ProN",
+        "Yu Gothic",
+        YuGothic,
+        sans-serif;
+}
+
+
+/* =========================
+   アンケートカード
+========================= */
+
+.survey-card {
+    width: 100%;
+    max-width: 720px;
+
+    margin: 30px auto;
+
+    padding: 30px;
+
+    background: white;
+
+    border-radius: 24px;
+
+    box-shadow:
+        0 8px 30px rgba(80, 50, 120, 0.12);
+}
+
+
+/* =========================
+   ヘッダー
+========================= */
+
+.header h1 {
+    margin: 0 0 25px;
+
+    color: #6f42c1;
+
+    font-size: 28px;
+    line-height: 1.5;
+}
+
+
+/* =========================
+   プログレス
+========================= */
+
+.progress-area {
+    margin-bottom: 30px;
+}
+
+.progress-text {
+    margin-bottom: 8px;
+
+    color: #777;
+
+    font-size: 13px;
+
+    text-align: right;
+}
+
+.progress-bar {
+    width: 100%;
+    height: 8px;
+
+    overflow: hidden;
+
+    background: #eee7fa;
+
+    border-radius: 999px;
+}
+
+.progress-fill {
+    width: 20%;
+    height: 100%;
+
+    background: #7b4bc4;
+
+    border-radius: 999px;
+
+    transition: width 0.3s ease;
+}
+
+
+/* =========================
+   質問
+========================= */
+
+.question {
+    display: none;
+
+    animation: fadeIn 0.25s ease;
+}
+
+.question.active {
+    display: block;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(8px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+
+.question-number {
+    margin-bottom: 8px;
+
+    color: #8b63c7;
+
+    font-size: 14px;
+    font-weight: bold;
+}
+
+
+.question h2 {
+    margin: 0 0 20px;
+
+    color: #333;
+
+    font-size: 21px;
+    line-height: 1.7;
+}
+
+
+.question-note {
+    margin-top: -10px;
+    margin-bottom: 20px;
+
+    color: #888;
+
+    font-size: 14px;
+}
+
+
+/* =========================
+   枝分かれラベル
+========================= */
+
+.branch-label {
+    display: inline-flex;
+
+    width: 38px;
+    height: 38px;
+
+    align-items: center;
+    justify-content: center;
+
+    margin-bottom: 15px;
+
+    border-radius: 50%;
+
+    font-size: 20px;
+    font-weight: bold;
+}
+
+.branch-label.green {
+    background: #e7f7e9;
+    color: #3c9b48;
+}
+
+.branch-label.red {
+    background: #fde8e8;
+    color: #d9534f;
+}
+
+
+/* =========================
+   選択肢
+========================= */
+
+.options {
+    display: flex;
+
+    flex-direction: column;
+
+    gap: 12px;
+}
+
+
+.option-card {
+    position: relative;
+
+    display: flex;
+
+    align-items: center;
+
+    min-height: 58px;
+
+    padding: 14px 18px;
+
+    background: #fff;
+
+    border: 2px solid #e4dcf2;
+
+    border-radius: 14px;
+
+    cursor: pointer;
+
+    transition:
+        background 0.2s,
+        border-color 0.2s,
+        transform 0.15s;
+}
+
+
+.option-card:hover {
+    background: #faf7ff;
+
+    border-color: #a786d8;
+
+    transform: translateY(-1px);
+}
+
+
+.option-card input {
+    position: absolute;
+
+    opacity: 0;
+}
+
+
+.option-card span {
+    width: 100%;
+
+    color: #444;
+
+    font-size: 16px;
+
+    line-height: 1.6;
+}
+
+
+/* 選択された状態 */
+
+.option-card:has(input:checked) {
+    background: #f1eaff;
+
+    border-color: #7b4bc4;
+}
+
+
+.option-card:has(input:checked)::after {
+    content: "✓";
+
+    margin-left: auto;
+
+    color: #7b4bc4;
+
+    font-size: 22px;
+    font-weight: bold;
+}
+
+
+/* =========================
+   ボタン
+========================= */
+
+.button-area {
+    display: flex;
+
+    gap: 12px;
+
+    margin-top: 35px;
+}
+
+
+.back-button,
+.next-button {
+    min-height: 54px;
+
+    padding: 0 25px;
+
+    border: none;
+
+    border-radius: 14px;
+
+    font-size: 16px;
+    font-weight: bold;
+
+    cursor: pointer;
+}
+
+
+.back-button {
+    flex: 1;
+
+    background: #eee;
+
+    color: #666;
+}
+
+
+.next-button {
+    flex: 2;
+
+    background: #7b4bc4;
+
+    color: white;
+}
+
+
+.next-button:hover {
+    background: #6836b0;
+}
+
+
+/* =========================
+   スマホ
+========================= */
+
+@media (max-width: 600px) {
+
+    body {
+        padding: 10px;
+    }
+
+    .survey-card {
+        margin: 10px auto;
+
+        padding: 22px 18px;
+
+        border-radius: 18px;
+    }
+
+    .header h1 {
+        font-size: 23px;
+    }
+
+    .question h2 {
+        font-size: 19px;
+    }
+
+    .option-card {
+        min-height: 55px;
+
+        padding: 12px 14px;
+    }
+
+    .option-card span {
+        font-size: 15px;
+    }
+
+    .button-area {
+        position: sticky;
+
+        bottom: 0;
+
+        padding-top: 10px;
+
+        background: white;
+    }
+}
