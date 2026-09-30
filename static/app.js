@@ -143,16 +143,12 @@ const branch1Questions = [
 
         options: [
             { label: "よく使用している" },
-
             { label: "外出時などに使用している" },
-
             {
                 label:
                     "以前は使用していたが、現在はあまり使用していない"
             },
-
             { label: "使用していない" },
-
             { label: "覚えていない" }
         ]
     },
@@ -169,16 +165,12 @@ const branch1Questions = [
 
         options: [
             { label: "毎回、保護者が塗っている" },
-
             {
                 label:
                     "基本的に保護者が塗り、一部は子どもが塗る"
             },
-
             { label: "子どもが自分で塗っている" },
-
             { label: "日によって違う" },
-
             { label: "その他" }
         ]
     },
@@ -503,7 +495,6 @@ const branch2Questions = [
 // =====================================================
 
 let answers = {};
-
 let currentIndex = 0;
 
 
@@ -588,7 +579,6 @@ function getQuestions() {
     return [
         firstQuestion
     ];
-
 }
 
 
@@ -607,7 +597,6 @@ function isOtherOption(option) {
         option.label === "その他" ||
         option.label.includes("その他（自由回答）")
     );
-
 }
 
 
@@ -621,9 +610,7 @@ function escapeHtml(value) {
         value === null ||
         value === undefined
     ) {
-
         return "";
-
     }
 
     return String(value)
@@ -632,14 +619,11 @@ function escapeHtml(value) {
         .replace(/>/g, "&gt;")
         .replace(/"/g, "&quot;")
         .replace(/'/g, "&#039;");
-
 }
 
 
 function escapeAttribute(value) {
-
     return escapeHtml(value);
-
 }
 
 
@@ -649,15 +633,17 @@ function escapeAttribute(value) {
 
 function renderQuestion() {
 
-    const questions =
-        getQuestions();
+    const questions = getQuestions();
+    const question = questions[currentIndex];
 
-    const question =
-        questions[currentIndex];
+    if (!question) {
+        console.error("質問が見つかりません:", currentIndex);
+        return;
+    }
 
 
     // -------------------------
-    // 全体の進捗
+    // 進捗
     // -------------------------
 
     progressCurrent.textContent =
@@ -666,11 +652,8 @@ function renderQuestion() {
     progressTotal.textContent =
         questions.length;
 
-
     const progress =
-        ((currentIndex + 1) /
-        questions.length) * 100;
-
+        ((currentIndex + 1) / questions.length) * 100;
 
     progressFill.style.width =
         `${progress}%`;
@@ -680,88 +663,65 @@ function renderQuestion() {
     // 戻る
     // -------------------------
 
-    if (
-        currentIndex === 0
-    ) {
-
-        backButton.style.display =
-            "none";
-
+    if (currentIndex === 0) {
+        backButton.style.display = "none";
     } else {
-
-        backButton.style.display =
-            "block";
-
+        backButton.style.display = "block";
     }
 
 
     // -------------------------
-    // 最後
+    // 次へ / 送信
     // -------------------------
 
     if (
         currentIndex ===
         questions.length - 1
     ) {
-
-        nextButton.textContent =
-            "回答を送信";
-
+        nextButton.textContent = "回答を送信";
     } else {
-
-        nextButton.textContent =
-            "次へ";
-
+        nextButton.textContent = "次へ";
     }
 
 
     // -------------------------
-    // 質問HTML
+    // HTML
     // -------------------------
 
     let html = "";
 
 
-    // ①・②表示
+    // 分岐ラベル
 
-    if (
-        question.branch
-    ) {
+    if (question.branch) {
 
         const branchClass =
             question.branch === "①"
                 ? "branch-green"
                 : "branch-orange";
 
-
         html += `
             <div class="branch-label ${branchClass}">
                 ${question.branch}
             </div>
         `;
-
     }
 
 
     html += `
-
         <section
             class="question"
             data-question-id="${escapeAttribute(question.id)}"
         >
-
             <h2>
                 ${escapeHtml(question.title)}
             </h2>
-
     `;
 
 
     // 注釈
 
-    if (
-        question.note
-    ) {
+    if (question.note) {
 
         html += `
             <p class="question-note">
@@ -769,7 +729,6 @@ function renderQuestion() {
                     .replace(/\n/g, "<br>")}
             </p>
         `;
-
     }
 
 
@@ -796,76 +755,39 @@ function renderQuestion() {
             (option, index) => {
 
                 let checked = false;
-
                 let rank = "";
 
 
-                // -------------------------
-                // single
-                // -------------------------
-
-                if (
-                    question.type === "single"
-                ) {
+                if (question.type === "single") {
 
                     checked =
                         selected === option.label;
-
                 }
 
 
-                // -------------------------
-                // multi
-                // -------------------------
-
-                if (
-                    question.type === "multi"
-                ) {
+                if (question.type === "multi") {
 
                     checked =
                         Array.isArray(selected) &&
-                        selected.includes(
-                            option.label
-                        );
-
+                        selected.includes(option.label);
                 }
 
 
-                // -------------------------
-                // rank2
-                // -------------------------
-
-                if (
-                    question.type === "rank2"
-                ) {
+                if (question.type === "rank2") {
 
                     checked =
                         Array.isArray(selected) &&
-                        selected.includes(
-                            option.label
-                        );
+                        selected.includes(option.label);
 
-
-                    if (
-                        checked
-                    ) {
+                    if (checked) {
 
                         rank =
-                            selected.indexOf(
-                                option.label
-                            ) + 1;
-
+                            selected.indexOf(option.label) + 1;
                     }
-
                 }
 
 
-                // -------------------------
-                // 選択肢カード
-                // -------------------------
-
                 html += `
-
                     <label
                         class="
                             option-card
@@ -894,7 +816,6 @@ function renderQuestion() {
                                     : ""
                             }
                         >
-
                 `;
 
 
@@ -908,9 +829,7 @@ function renderQuestion() {
                 ) {
 
                     html += `
-
                         <div class="option-images">
-
                     `;
 
 
@@ -918,15 +837,15 @@ function renderQuestion() {
                         (image, imageIndex) => {
 
                             html += `
-
                                 <img
-                                    src="${image}"
+                                    src="${escapeAttribute(image)}"
                                     alt="${escapeAttribute(
                                         option.label
                                     )} ${imageIndex + 1}"
                                     class="option-image"
+                                    loading="lazy"
+                                    onerror="this.style.display='none'; console.error('画像読み込み失敗:', this.src);"
                                 >
-
                             `;
 
                         }
@@ -934,30 +853,19 @@ function renderQuestion() {
 
 
                     html += `
-
                         </div>
-
                     `;
-
                 }
 
 
-                // =================================================
                 // 名前・説明
-                // =================================================
 
                 html += `
-
                     <div class="option-information">
 
                         <span class="option-text">
-
-                            ${escapeHtml(
-                                option.label
-                            )}
-
+                            ${escapeHtml(option.label)}
                         </span>
-
 
                         ${
                             option.description
@@ -972,44 +880,32 @@ function renderQuestion() {
                         }
 
                     </div>
-
                 `;
 
 
-                // =================================================
                 // 順番バッジ
-                // =================================================
 
                 if (
                     question.type === "rank2"
                 ) {
 
                     html += `
-
                         <span
                             class="rank-badge ${
-                                rank
-                                    ? "show"
-                                    : ""
+                                rank ? "show" : ""
                             }"
                             data-rank-for="${
-                                escapeAttribute(
-                                    option.label
-                                )
+                                escapeAttribute(option.label)
                             }"
                         >
                             ${rank}
                         </span>
-
                     `;
-
                 }
 
 
                 html += `
-
                     </label>
-
                 `;
 
             }
@@ -1049,9 +945,7 @@ function renderQuestion() {
                             otherOption.label
                     )
                     : (
-                        Array.isArray(
-                            selectedValue
-                        ) &&
+                        Array.isArray(selectedValue) &&
                         otherOption &&
                         selectedValue.includes(
                             otherOption.label
@@ -1071,21 +965,14 @@ function renderQuestion() {
 
 
                 html += `
-
                     <textarea
                         id="${question.id}-other"
                         class="other-text"
                         placeholder="その他の場合はこちらにご記入ください"
-                    >${escapeHtml(
-                        otherText
-                    )}</textarea>
-
+                    >${escapeHtml(otherText)}</textarea>
                 `;
-
             }
-
         }
-
     }
 
 
@@ -1102,20 +989,17 @@ function renderQuestion() {
 
 
         html += `
-
             <textarea
                 id="${question.id}-text"
                 class="free-text"
                 placeholder="自由にご記入ください"
             >${escapeHtml(value)}</textarea>
-
         `;
-
     }
 
 
     // =================================================
-    // 自由回答＋選択肢
+    // multiText
     // =================================================
 
     if (
@@ -1129,13 +1013,11 @@ function renderQuestion() {
 
 
         html += `
-
             <textarea
                 id="${question.id}-free"
                 class="free-text"
                 placeholder="自由にご記入ください"
             >${escapeHtml(freeText)}</textarea>
-
         `;
 
 
@@ -1158,18 +1040,14 @@ function renderQuestion() {
 
 
                 html += `
-
                     <label class="option-card">
 
                         <input
                             type="checkbox"
-
                             name="${question.id}"
-
                             value="${escapeAttribute(
                                 option.label
                             )}"
-
                             ${
                                 checked
                                     ? "checked"
@@ -1184,9 +1062,7 @@ function renderQuestion() {
                         </span>
 
                     </label>
-
                 `;
-
             }
         );
 
@@ -1194,7 +1070,6 @@ function renderQuestion() {
         html += `
             </div>
         `;
-
     }
 
 
@@ -1207,9 +1082,7 @@ function renderQuestion() {
         html;
 
 
-    // =================================================
-    // b2_q8 の見た目を統一
-    // =================================================
+    // b2_q8 見た目統一
 
     if (
         question.id === "b2_q8"
@@ -1220,20 +1093,15 @@ function renderQuestion() {
                 ".question h2"
             );
 
-        if (
-            title
-        ) {
+        if (title) {
 
             title.style.fontFamily =
                 "inherit";
 
             title.style.fontWeight =
                 "600";
-
         }
-
     }
-
 }
 
 
@@ -1263,40 +1131,22 @@ container.addEventListener(
             questions[currentIndex];
 
 
+        if (!question) {
+            return;
+        }
+
+
         // =================================================
         // 最初の分岐
-        // ★ここが今回の重要修正部分
         // =================================================
 
         if (
             question.id === "q0"
         ) {
 
-            const selectedOption =
-                question.options.find(
-                    option =>
-                        option.label ===
-                        input.value
-                );
-
-
-            if (
-                !selectedOption
-            ) {
-
-                return;
-
-            }
-
-
-            // ★ labelだけを保存する
-            // これで getBranch() が正しく①②を判定できる
-
             answers["q0"] =
-                selectedOption.label;
+                input.value;
 
-
-            // 以前のルートの回答を消す
 
             branch1Questions.forEach(
                 q => {
@@ -1310,7 +1160,6 @@ container.addEventListener(
                     delete answers[
                         `${q.id}_free`
                     ];
-
                 }
             );
 
@@ -1327,21 +1176,15 @@ container.addEventListener(
                     delete answers[
                         `${q.id}_free`
                     ];
-
                 }
             );
 
 
-            // 1問目に戻す
-
-            currentIndex =
-                0;
-
+            currentIndex = 0;
 
             renderQuestion();
 
             return;
-
         }
 
 
@@ -1378,34 +1221,25 @@ container.addEventListener(
 
 
             if (
-                isOtherOption(
-                    selectedOption
-                ) ||
-                isOtherOption(
-                    previousOption
-                )
+                isOtherOption(selectedOption) ||
+                isOtherOption(previousOption)
             ) {
 
                 if (
-                    !isOtherOption(
-                        selectedOption
-                    )
+                    !isOtherOption(selectedOption)
                 ) {
 
                     delete answers[
                         `${question.id}_other`
                     ];
-
                 }
 
 
                 renderQuestion();
-
             }
 
 
             return;
-
         }
 
 
@@ -1418,45 +1252,38 @@ container.addEventListener(
         ) {
 
             let selected =
-                answers[question.id] || [];
+                Array.isArray(
+                    answers[question.id]
+                )
+                    ? [...answers[question.id]]
+                    : [];
 
 
-            if (
-                input.checked
-            ) {
+            if (input.checked) {
 
-                if (
-                    selected.length >= 2
-                ) {
+                if (selected.length >= 2) {
 
-                    input.checked =
-                        false;
-
+                    input.checked = false;
 
                     alert(
                         "選択できるのは最大2つまでです。"
                     );
 
-
                     return;
-
                 }
 
 
-                selected = [
-                    ...selected,
+                selected.push(
                     input.value
-                ];
+                );
 
             } else {
 
                 selected =
                     selected.filter(
                         value =>
-                            value !==
-                            input.value
+                            value !== input.value
                     );
-
             }
 
 
@@ -1466,9 +1293,7 @@ container.addEventListener(
 
             updateRankBadges();
 
-
             return;
-
         }
 
 
@@ -1484,9 +1309,7 @@ container.addEventListener(
                 Array.isArray(
                     answers[question.id]
                 )
-                    ? [
-                        ...answers[question.id]
-                    ]
+                    ? [...answers[question.id]]
                     : [];
 
 
@@ -1509,17 +1332,12 @@ container.addEventListener(
                                     value
                             );
 
-                        return isOtherOption(
-                            item
-                        );
-
+                        return isOtherOption(item);
                     }
                 );
 
 
-            // -------------------------------------------------
-            // 「特にない」などの排他的選択肢
-            // -------------------------------------------------
+            // 排他的選択肢
 
             if (
                 option &&
@@ -1546,16 +1364,11 @@ container.addEventListener(
 
                                 checkbox.checked =
                                     false;
-
                             }
-
                         }
                     );
 
             } else {
-
-                // 通常の選択肢を選んだら
-                // 「特にない」を外す
 
                 if (
                     input.checked &&
@@ -1570,9 +1383,7 @@ container.addEventListener(
                         );
 
 
-                    if (
-                        exclusive
-                    ) {
+                    if (exclusive) {
 
                         const exclusiveInput =
                             container.querySelector(
@@ -1582,13 +1393,10 @@ container.addEventListener(
                             );
 
 
-                        if (
-                            exclusiveInput
-                        ) {
+                        if (exclusiveInput) {
 
                             exclusiveInput.checked =
                                 false;
-
                         }
 
 
@@ -1598,17 +1406,11 @@ container.addEventListener(
                                     value !==
                                     exclusive.label
                             );
-
                     }
-
                 }
 
 
-                // 選択
-
-                if (
-                    input.checked
-                ) {
+                if (input.checked) {
 
                     if (
                         !selected.includes(
@@ -1619,15 +1421,9 @@ container.addEventListener(
                         selected.push(
                             input.value
                         );
-
                     }
 
-                }
-
-
-                // 選択解除
-
-                else {
+                } else {
 
                     selected =
                         selected.filter(
@@ -1635,17 +1431,13 @@ container.addEventListener(
                                 value !==
                                 input.value
                         );
-
                 }
-
             }
 
 
             answers[question.id] =
                 selected;
 
-
-            // 現在「その他」が選ばれているか
 
             const isOtherSelected =
                 selected.some(
@@ -1658,10 +1450,7 @@ container.addEventListener(
                                     value
                             );
 
-                        return isOtherOption(
-                            item
-                        );
-
+                        return isOtherOption(item);
                     }
                 );
 
@@ -1671,24 +1460,19 @@ container.addEventListener(
                 isOtherSelected
             ) {
 
-                if (
-                    !isOtherSelected
-                ) {
+                if (!isOtherSelected) {
 
                     delete answers[
                         `${question.id}_other`
                     ];
-
                 }
 
 
                 renderQuestion();
-
             }
 
 
             return;
-
         }
 
 
@@ -1704,9 +1488,7 @@ container.addEventListener(
                 answers[question.id] || [];
 
 
-            if (
-                input.checked
-            ) {
+            if (input.checked) {
 
                 selected.push(
                     input.value
@@ -1720,17 +1502,11 @@ container.addEventListener(
                             value !==
                             input.value
                     );
-
             }
 
 
             answers[question.id] =
-                [
-                    ...new Set(
-                        selected
-                    )
-                ];
-
+                [...new Set(selected)];
         }
 
     }
@@ -1750,12 +1526,9 @@ container.addEventListener(
 
 
         if (
-            target.tagName !==
-            "TEXTAREA"
+            target.tagName !== "TEXTAREA"
         ) {
-
             return;
-
         }
 
 
@@ -1766,6 +1539,11 @@ container.addEventListener(
             questions[currentIndex];
 
 
+        if (!question) {
+            return;
+        }
+
+
         // 通常の自由回答
 
         if (
@@ -1774,7 +1552,6 @@ container.addEventListener(
 
             answers[question.id] =
                 target.value;
-
         }
 
 
@@ -1804,9 +1581,7 @@ container.addEventListener(
                             otherOption.label
                     )
                     : (
-                        Array.isArray(
-                            selected
-                        ) &&
+                        Array.isArray(selected) &&
                         otherOption &&
                         selected.includes(
                             otherOption.label
@@ -1814,21 +1589,17 @@ container.addEventListener(
                     );
 
 
-            if (
-                isOtherSelected
-            ) {
+            if (isOtherSelected) {
 
                 answers[
                     `${question.id}_other`
                 ] =
                     target.value;
-
             }
-
         }
 
 
-        // 自由回答＋選択肢
+        // multiText
 
         if (
             question.type === "multiText"
@@ -1838,7 +1609,6 @@ container.addEventListener(
                 `${question.id}_free`
             ] =
                 target.value;
-
         }
 
     }
@@ -1859,11 +1629,10 @@ function updateRankBadges() {
 
 
     if (
+        !question ||
         question.type !== "rank2"
     ) {
-
         return;
-
     }
 
 
@@ -1888,12 +1657,9 @@ function updateRankBadges() {
                     );
 
 
-                if (
-                    index === -1
-                ) {
+                if (index === -1) {
 
-                    badge.textContent =
-                        "";
+                    badge.textContent = "";
 
                     badge.classList.remove(
                         "show"
@@ -1907,12 +1673,9 @@ function updateRankBadges() {
                     badge.classList.add(
                         "show"
                     );
-
                 }
-
             }
         );
-
 }
 
 
@@ -1931,7 +1694,6 @@ function escapeSelector(value) {
             /"/g,
             '\\"'
         );
-
 }
 
 
@@ -1948,53 +1710,47 @@ function validateQuestion() {
         questions[currentIndex];
 
 
+    if (!question) {
+        return false;
+    }
+
+
     const value =
         answers[question.id];
 
 
-    // =================================================
     // 最初の質問
-    // =================================================
 
     if (
         question.id === "q0"
     ) {
 
-        if (
-            !value
-        ) {
+        if (!value) {
 
             alert(
                 "回答を1つ選択してください。"
             );
 
             return false;
-
         }
 
         return true;
-
     }
 
 
-    // =================================================
     // single
-    // =================================================
 
     if (
         question.type === "single"
     ) {
 
-        if (
-            !value
-        ) {
+        if (!value) {
 
             alert(
                 "回答を1つ選択してください。"
             );
 
             return false;
-
         }
 
 
@@ -2018,26 +1774,19 @@ function validateQuestion() {
                 ] || "";
 
 
-            if (
-                !otherText.trim()
-            ) {
+            if (!otherText.trim()) {
 
                 alert(
                     "「その他」を選択した場合は、内容をご記入ください。"
                 );
 
                 return false;
-
             }
-
         }
-
     }
 
 
-    // =================================================
     // rank2
-    // =================================================
 
     if (
         question.type === "rank2"
@@ -2053,15 +1802,11 @@ function validateQuestion() {
             );
 
             return false;
-
         }
-
     }
 
 
-    // =================================================
     // multi
-    // =================================================
 
     if (
         question.type === "multi"
@@ -2077,7 +1822,6 @@ function validateQuestion() {
             );
 
             return false;
-
         }
 
 
@@ -2101,26 +1845,19 @@ function validateQuestion() {
                 ] || "";
 
 
-            if (
-                !otherText.trim()
-            ) {
+            if (!otherText.trim()) {
 
                 alert(
                     "「その他」を選択した場合は、内容をご記入ください。"
                 );
 
                 return false;
-
             }
-
         }
-
     }
 
 
-    // =================================================
     // multiText
-    // =================================================
 
     if (
         question.type === "multiText"
@@ -2148,27 +1885,21 @@ function validateQuestion() {
             );
 
             return false;
-
         }
-
     }
 
 
-    // =================================================
-    // 自由回答
-    // =================================================
+    // text
 
     if (
         question.type === "text"
     ) {
 
         return true;
-
     }
 
 
     return true;
-
 }
 
 
@@ -2183,19 +1914,13 @@ nextButton.addEventListener(
         if (
             !validateQuestion()
         ) {
-
             return;
-
         }
 
 
         const questions =
             getQuestions();
 
-
-        // -------------------------------------------------
-        // 最後
-        // -------------------------------------------------
 
         if (
             currentIndex ===
@@ -2205,12 +1930,10 @@ nextButton.addEventListener(
             await submitSurvey();
 
             return;
-
         }
 
 
         currentIndex++;
-
 
         renderQuestion();
 
@@ -2235,14 +1958,11 @@ backButton.addEventListener(
         if (
             currentIndex <= 0
         ) {
-
             return;
-
         }
 
 
         currentIndex--;
-
 
         renderQuestion();
 
@@ -2262,8 +1982,7 @@ backButton.addEventListener(
 
 async function submitSurvey() {
 
-    nextButton.disabled =
-        true;
+    nextButton.disabled = true;
 
     nextButton.textContent =
         "送信中...";
@@ -2275,6 +1994,15 @@ async function submitSurvey() {
 
     try {
 
+        console.log(
+            "送信開始",
+            {
+                branch: branch,
+                answers: answers
+            }
+        );
+
+
         const response =
             await fetch(
                 "/submit",
@@ -2283,22 +2011,53 @@ async function submitSurvey() {
 
                     headers: {
                         "Content-Type":
+                            "application/json",
+                        "Accept":
                             "application/json"
                     },
 
                     body: JSON.stringify({
-                        branch:
-                            branch,
-
-                        answers:
-                            answers
+                        branch: branch,
+                        answers: answers
                     })
                 }
             );
 
 
-        const result =
-            await response.json();
+        // -------------------------------------------------
+        // まずテキストとして受け取る
+        // JSONで返ってこない場合も原因が分かるようにする
+        // -------------------------------------------------
+
+        const responseText =
+            await response.text();
+
+
+        console.log(
+            "送信レスポンス:",
+            response.status,
+            responseText
+        );
+
+
+        let result = null;
+
+
+        try {
+
+            result =
+                JSON.parse(
+                    responseText
+                );
+
+        } catch (jsonError) {
+
+            throw new Error(
+                "サーバーからJSONではない応答が返りました。" +
+                ` HTTP ${response.status}` +
+                ` / ${responseText.substring(0, 300)}`
+            );
+        }
 
 
         if (
@@ -2308,28 +2067,30 @@ async function submitSurvey() {
 
             throw new Error(
                 result.message ||
-                "送信に失敗しました。"
+                `送信に失敗しました。HTTP ${response.status}`
             );
-
         }
+
+
+        console.log(
+            "送信成功"
+        );
 
 
         window.location.href =
             "/thanks";
 
-
-    } catch (
-        error
-    ) {
+    } catch (error) {
 
         console.error(
+            "SUBMIT ERROR:",
             error
         );
 
 
         alert(
-            "回答の送信に失敗しました。\n" +
-            "もう一度お試しください。"
+            "回答の送信に失敗しました。\n\n" +
+            error.message
         );
 
 
@@ -2338,7 +2099,6 @@ async function submitSurvey() {
 
         nextButton.textContent =
             "回答を送信";
-
     }
 
 }
