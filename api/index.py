@@ -1,125 +1,226 @@
+from flask import Flask, render_template, request, jsonify, Response
 import os
+import csv
+import io
 import json
-
-from flask import Flask, render_template, request, jsonify
+from datetime import datetime
 import psycopg
-from psycopg.types.json import Json
 
+
+# =========================================================
+# パス設定
+# =========================================================
+
+API_DIR = os.path.dirname(os.path.abspath(__file__))
+BASE_DIR = os.path.dirname(API_DIR)
+
+TEMPLATE_DIR = os.path.join(BASE_DIR, "templates")
+STATIC_DIR = os.path.join(BASE_DIR, "static")
+
+
+# =========================================================
+# Flask
+# =========================================================
 
 app = Flask(
     __name__,
-    template_folder="../templates",
-    static_folder="../static"
+    template_folder=TEMPLATE_DIR,
+    static_folder=STATIC_DIR,
+    static_url_path="/static"
 )
 
 
-# ========================================
-# データベース
-# ========================================
+# =========================================================
+# Neon PostgreSQL
+# =========================================================
 
 DATABASE_URL = os.environ.get("DATABASE_URL")
 
 
-def get_connection():
+def get_db():
+
     if not DATABASE_URL:
-        raise RuntimeError(
+        raise Exception(
             "DATABASE_URL が設定されていません。"
         )
 
-    return psycopg.connect(DATABASE_URL)
+    return psycopg.connect(
+        DATABASE_URL,
+        sslmode="require"
+    )
 
+
+# =========================================================
+# データベース準備
+# =========================================================
 
 def create_table():
 
-    with get_connection() as conn:
+    conn = get_db()
+    cursor = conn.cursor()
 
-        with conn.cursor() as cur:
+    # -----------------------------------------------------
+    # 既存の responses テーブルがある場合もそのまま使う
+    # -----------------------------------------------------
 
-            cur.execute("""
-                CREATE TABLE IF NOT EXISTS survey_responses (
-                    id SERIAL PRIMARY KEY,
-                    branch TEXT NOT NULL,
-                    answers JSONB NOT NULL,
-                    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
-                )
-            """)
+    cursor.execute(
+        """
+        CREATE TABLE IF NOT EXISTS responses (
+            id SERIAL PRIMARY KEY,
+            created_at TIMESTAMP
+        )
+        """
+    )
 
-        conn.commit()
+    # -----------------------------------------------------
+    # 今回のアンケート用の列を追加
+    # -----------------------------------------------------
+
+    cursor.execute(
+        """
+        ALTER TABLE responses
+        ADD COLUMN IF NOT EXISTS branch TEXT
+        """
+    )
+
+    cursor.execute(
+        """
+        ALTER TABLE responses
+        ADD COLUMN IF NOT EXISTS answers JSONB
+        """
+    )
+
+    conn.commit()
+
+    cursor.close()
+    conn.close()
 
 
-# ========================================
-# アンケート
-# ========================================
+# =========================================================
+# トップページ
+# =========================================================
 
 @app.route("/")
 def index():
 
-    return render_template("index.html")
+    create_table()
+
+    return render_template(
+        "index2.html"
+    )
 
 
-# ========================================
-# 回答送信
-# ========================================
+# =========================================================
+# アンケート送信
+# =========================================================
 
 @app.route("/submit", methods=["POST"])
 def submit():
 
     try:
 
-        data = request.get_json()
+        # -------------------------------------------------
+        # JSONを受け取る
+        # -------------------------------------------------
+
+        data = request.get_json(
+            silent=True
+        )
 
         if not data:
 
             return jsonify({
                 "success": False,
-                "message": "回答データがありません。"
+                "message": "回答データを受け取れませんでした。"
             }), 400
 
 
-        branch = data.get("branch")
+        # -------------------------------------------------
+        # 分岐
+        # -------------------------------------------------
 
-        answers = data.get("answers")
+        branch = data.get(
+            "branch",
+            ""
+        )
 
 
-        if branch not in ["①", "②"]:
+        # -------------------------------------------------
+        # 全回答
+        # -------------------------------------------------
+
+        answers = data.get(
+            "answers",
+            {}
+        )
+
+
+        if not isinstance(
+            answers,
+            dict
+        ):
 
             return jsonify({
                 "success": False,
-                "message": "分岐情報が正しくありません。"
+                "message": "回答データの形式が正しくありません。"
             }), 400
 
 
-        if not isinstance(answers, dict):
+        # -------------------------------------------------
+        # 回答日時
+        # -------------------------------------------------
 
-            return jsonify({
-                "success": False,
-                "message": "回答データが正しくありません。"
-            }), 400
+        created_at = datetime.now()
 
 
-        # テーブル作成
+        # -------------------------------------------------
+        # DB準備
+        # -------------------------------------------------
+
         create_table()
 
 
+        conn = get_db()
+        cursor = conn.cursor()
+
+
+        # -------------------------------------------------
         # 保存
-        with get_connection() as conn:
+        # -------------------------------------------------
 
-            with conn.cursor() as cur:
-
-                cur.execute(
-                    """
-                    INSERT INTO survey_responses
-                    (branch, answers)
-                    VALUES (%s, %s)
-                    """,
-                    (
-                        branch,
-                        Json(answers)
-                    )
+        cursor.execute(
+            """
+            INSERT INTO responses (
+                created_at,
+                branch,
+                answers
+            )
+            VALUES (
+                %s,
+                %s,
+                %s::jsonb
+            )
+            """,
+            (
+                created_at,
+                branch,
+                json.dumps(
+                    answers,
+                    ensure_ascii=False
                 )
+            )
+        )
 
-            conn.commit()
 
+        conn.commit()
+
+        cursor.close()
+        conn.close()
+
+
+        # -------------------------------------------------
+        # 成功
+        # -------------------------------------------------
 
         return jsonify({
             "success": True
@@ -128,32 +229,262 @@ def submit():
 
     except Exception as e:
 
-        print("ERROR:", e)
+        print(
+            "SUBMIT ERROR:",
+            repr(e)
+        )
+
 
         return jsonify({
             "success": False,
-            "message": "回答の保存に失敗しました。"
+            "message": str(e)
         }), 500
 
 
-# ========================================
-# Thank you
-# ========================================
+# =========================================================
+# ありがとうページ
+# =========================================================
 
 @app.route("/thanks")
 def thanks():
 
-    return render_template("thanks.html")
+    return render_template(
+        "thanks2.html"
+    )
 
 
-# ========================================
+# =========================================================
+# CSVダウンロード
+# =========================================================
+
+@app.route("/download_csv")
+def download_csv():
+
+    try:
+
+        create_table()
+
+        conn = get_db()
+        cursor = conn.cursor()
+
+
+        cursor.execute(
+            """
+            SELECT
+                id,
+                created_at,
+                branch,
+                answers
+            FROM responses
+            ORDER BY id
+            """
+        )
+
+
+        rows = cursor.fetchall()
+
+        cursor.close()
+        conn.close()
+
+
+        # -------------------------------------------------
+        # 回答がない場合
+        # -------------------------------------------------
+
+        if not rows:
+
+            return "まだ回答データがありません。"
+
+
+        # -------------------------------------------------
+        # JSONを展開
+        # -------------------------------------------------
+
+        answer_dicts = []
+
+        all_keys = []
+
+
+        for row in rows:
+
+            answer_json = row[3]
+
+
+            if answer_json is None:
+
+                answers = {}
+
+            elif isinstance(
+                answer_json,
+                dict
+            ):
+
+                answers = answer_json
+
+            else:
+
+                try:
+
+                    answers = json.loads(
+                        answer_json
+                    )
+
+                except Exception:
+
+                    answers = {}
+
+
+            answer_dicts.append(
+                answers
+            )
+
+
+            for key in answers.keys():
+
+                if key not in all_keys:
+
+                    all_keys.append(key)
+
+
+        # -------------------------------------------------
+        # CSV作成
+        # -------------------------------------------------
+
+        output = io.StringIO(
+            newline=""
+        )
+
+
+        writer = csv.writer(
+            output
+        )
+
+
+        # ヘッダー
+        writer.writerow(
+            [
+                "ID",
+                "回答日時",
+                "分岐"
+            ]
+            +
+            all_keys
+        )
+
+
+        # -------------------------------------------------
+        # データ
+        # -------------------------------------------------
+
+        for row, answers in zip(
+            rows,
+            answer_dicts
+        ):
+
+            row_data = [
+
+                row[0],
+
+                row[1],
+
+                row[2]
+
+            ]
+
+
+            for key in all_keys:
+
+                value = answers.get(
+                    key,
+                    ""
+                )
+
+
+                # 配列の場合
+                # 例：rank2 / multi
+
+                if isinstance(
+                    value,
+                    list
+                ):
+
+                    value = ", ".join(
+                        str(item)
+                        for item in value
+                    )
+
+
+                elif isinstance(
+                    value,
+                    dict
+                ):
+
+                    value = json.dumps(
+                        value,
+                        ensure_ascii=False
+                    )
+
+
+                row_data.append(
+                    value
+                )
+
+
+            writer.writerow(
+                row_data
+            )
+
+
+        # -------------------------------------------------
+        # CSVレスポンス
+        # -------------------------------------------------
+
+        csv_data = (
+            "\ufeff"
+            +
+            output.getvalue()
+        )
+
+
+        response = Response(
+            csv_data,
+            mimetype="text/csv"
+        )
+
+
+        response.headers[
+            "Content-Disposition"
+        ] = (
+            "attachment; "
+            "filename=child_sunscreen_survey.csv"
+        )
+
+
+        return response
+
+
+    except Exception as e:
+
+        print(
+            "CSV ERROR:",
+            repr(e)
+        )
+
+
+        return (
+            "CSVの作成に失敗しました。",
+            500
+        )
+
+
+# =========================================================
 # ローカル実行
-# ========================================
+# =========================================================
 
 if __name__ == "__main__":
 
     app.run(
-        debug=True,
         host="0.0.0.0",
-        port=5000
+        port=5000,
+        debug=True
     )
