@@ -758,27 +758,18 @@ function getBranch() {
         return null;
     }
 
-
-    // ① 保護者・子育て経験者側
     if (
         value === "現在している" ||
         value === "過去にしていた"
     ) {
-
         return "①";
-
     }
 
-
-    // ② 子育て経験なし側
     if (
         value === "経験なし"
     ) {
-
         return "②";
-
     }
-
 
     return null;
 }
