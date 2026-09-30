@@ -13,10 +13,6 @@ const imagePath = (filename) => {
 
 
 // -----------------------------------------------------
-// 共通の塗り方
-// -----------------------------------------------------
-
-// -----------------------------------------------------
 // 塗り方4種類
 // -----------------------------------------------------
 
@@ -74,6 +70,7 @@ const coatingOptions = [
     }
 
 ];
+
 
 // =====================================================
 // 最初の質問
@@ -304,40 +301,29 @@ const branch1Questions = [
         branch: "①",
 
         title:
-            "子ども自身で塗る場合、気になることは？",
-
-        note:
-            "複数回答OK",
+            "日焼け止めを選ぶとき、重視することは何ですか？",
 
         type: "multi",
 
         options: [
 
-            { label: "塗りムラができそう" },
+            { label: "肌へのやさしさ" },
 
-            { label: "塗る量が分からなそう" },
+            { label: "SPF・PAなどの効果" },
 
-            { label: "顔や目の周りに使うのが心配" },
+            { label: "塗りやすさ" },
 
-            { label: "手や服、髪が汚れそう" },
+            { label: "落としやすさ" },
 
-            { label: "日焼け止めが手につくのが嫌" },
+            { label: "価格" },
 
-            { label: "容器をうまく使えなそう" },
+            { label: "容量" },
 
-            { label: "衛生面が気になる" },
+            { label: "香り" },
 
-            { label: "時間がかかりそう" },
+            { label: "子どもが使いやすいこと" },
 
-            {
-                label: "特にない",
-                exclusive: true
-            },
-
-            {
-                label: "その他（自由回答）",
-                other: true
-            }
+            { label: "その他" }
 
         ]
 
@@ -354,35 +340,29 @@ const branch1Questions = [
         branch: "①",
 
         title:
-            "子どもが自分から塗りたくなるために、どんな工夫があるといいと思いますか。",
-
-        note:
-            "複数回答OK",
+            "日焼け止めを子どもに塗るとき、困ることはありますか？",
 
         type: "multi",
 
         options: [
 
-            { label: "自分で持って塗れる" },
+            { label: "子どもが嫌がる" },
 
-            { label: "コロコロなど、動作自体が楽しい" },
+            { label: "子どもが逃げる・動く" },
 
-            { label: "筆のように塗れる" },
+            { label: "塗るのに時間がかかる" },
 
-            { label: "好きな色・デザイン" },
+            { label: "ムラなく塗るのが難しい" },
 
-            { label: "キャラクターなどのデザイン" },
+            { label: "顔や目の周りが塗りにくい" },
 
-            { label: "遊び感覚で使える" },
+            { label: "外出前は忙しい" },
 
-            { label: "塗った場所が分かりやすい" },
+            { label: "塗り直しが大変" },
 
-            { label: "自分で使いやすい大きさ・形" },
+            { label: "特にない", exclusive: true },
 
-            {
-                label: "その他（自由回答）",
-                other: true
-            }
+            { label: "その他" }
 
         ]
 
@@ -399,39 +379,25 @@ const branch1Questions = [
         branch: "①",
 
         title:
-            "子どもが自分で濡れる日焼け止めがあるとしたら、どんなことに期待しますか",
-
-        note:
-            "複数OK",
+            "もし子どもが自分で日焼け止めを塗るようになったら、どんなことを期待しますか？",
 
         type: "multi",
 
         options: [
 
-            { label: "保護者が塗る手間が減る" },
+            { label: "保護者の負担が減る" },
+
+            { label: "子どもが自分の肌を守る意識を持つ" },
 
             { label: "外出前の準備が楽になる" },
 
-            {
-                label:
-                    "子どもが自分で身支度するきっかけになる"
-            },
+            { label: "日焼け止めを塗ることを嫌がらなくなる" },
 
-            { label: "日焼け止めを嫌がらなくなる" },
+            { label: "親子で楽しく使える" },
 
-            { label: "日焼け止めを塗る習慣が身につく" },
+            { label: "特にない", exclusive: true },
 
-            { label: "親子でケンカすることが減る" },
-
-            {
-                label: "特に期待することはない",
-                exclusive: true
-            },
-
-            {
-                label: "その他（自由回答）",
-                other: true
-            }
+            { label: "その他" }
 
         ]
 
@@ -448,23 +414,9 @@ const branch1Questions = [
         branch: "①",
 
         title:
-            "子どもが自分から使いたくなることを目的とした日焼け止めがあれば試したいですか",
+            "子どもが使いたくなる日焼け止めについて、何かアイデアや希望はありますか？",
 
-        type: "single",
-
-        options: [
-
-            { label: "ぜひ試してみたい" },
-
-            { label: "少し試してみたい" },
-
-            { label: "どちらともいえない" },
-
-            { label: "あまり思わない" },
-
-            { label: "思わない" }
-
-        ]
+        type: "text"
 
     },
 
@@ -479,13 +431,9 @@ const branch1Questions = [
         branch: "①",
 
         title:
-            "こんなものがあったらいいなと思うものはどんなものですか。",
+            "その他、日焼け止めについて伝えたいことがあれば教えてください。",
 
-        note: "自由回答",
-
-        type: "text",
-
-        optional: true
+        type: "text"
 
     }
 
@@ -508,7 +456,7 @@ const branch2Questions = [
         branch: "②",
 
         title:
-            "【年齢をお答えください】",
+            "あなたの年代を教えてください",
 
         type: "single",
 
@@ -516,15 +464,15 @@ const branch2Questions = [
 
             { label: "10代" },
 
-            { label: "20代前半" },
-
-            { label: "20代後半" },
+            { label: "20代" },
 
             { label: "30代" },
 
             { label: "40代" },
 
-            { label: "その他" }
+            { label: "50代" },
+
+            { label: "60代以上" }
 
         ]
 
@@ -541,17 +489,19 @@ const branch2Questions = [
         branch: "②",
 
         title:
-            "子どもの頃日焼け止めを自分で塗ることはあった？",
+            "子どもの頃、日焼け止めを使っていましたか？",
 
         type: "single",
 
         options: [
 
-            { label: "ほとんど自分" },
+            { label: "よく使っていた" },
 
-            { label: "一部自分で塗っていた" },
+            { label: "たまに使っていた" },
 
-            { label: "ほとんど親が塗っていた" },
+            { label: "ほとんど使っていなかった" },
+
+            { label: "使っていなかった" },
 
             { label: "覚えていない" }
 
@@ -570,14 +520,27 @@ const branch2Questions = [
         branch: "②",
 
         title:
-            "もし、子どもの頃、自分で日焼け止めを塗るなら、どんな塗り方だったらやってみたい？",
+            "子どもの頃、日焼け止めを塗ることについてどう感じていましたか？",
 
-        note:
-            "最大2つ回答できます。2つ選ぶ場合は、一番目・二番目の順番で選んでください。",
+        type: "multi",
 
-        type: "rank2",
+        options: [
 
-        options: coatingOptions
+            { label: "好きだった" },
+
+            { label: "嫌だった" },
+
+            { label: "面倒だった" },
+
+            { label: "ベタベタするのが嫌だった" },
+
+            { label: "特に何も感じなかった" },
+
+            { label: "覚えていない" },
+
+            { label: "その他" }
+
+        ]
 
     },
 
@@ -592,26 +555,29 @@ const branch2Questions = [
         branch: "②",
 
         title:
-            "次の中で子どもが楽しみながら、使えそうと思うものを選んでください",
+            "子どもの頃、日焼け止めを塗るときに困ったことはありましたか？",
 
-        note:
-            "※自分が使ってみたいと思うものでもOK\n最大2つ回答できます。2つ選ぶ場合は、一番目・二番目の順番で選んでください。",
-
-        type: "rank2",
+        type: "multi",
 
         options: [
 
-            { label: "コロコロ転がして塗る" },
+            { label: "ベタベタする" },
 
-            { label: "筆で絵を描くように塗る" },
+            { label: "塗るのが面倒" },
 
-            { label: "ポンポンして塗る" },
+            { label: "時間がかかる" },
 
-            { label: "色や模様が変化する" },
+            { label: "匂いが気になる" },
 
-            { label: "好きなデザイン・カラーから選べる" },
+            { label: "冷たい" },
 
-            { label: "キャラクターなどがついている" },
+            { label: "服や髪につく" },
+
+            { label: "自分ではうまく塗れない" },
+
+            { label: "日焼け止めを塗る必要性が分からない" },
+
+            { label: "特にない", exclusive: true },
 
             { label: "その他" }
 
@@ -630,38 +596,21 @@ const branch2Questions = [
         branch: "②",
 
         title:
-            "子どもが自分で使う日焼け止めと聞いて、心配になりそうなことは？",
+            "もし子どもの頃に、日焼け止めを楽しく塗れる商品があったら使ってみたいと思いましたか？",
 
-        note:
-            "複数回答OK",
-
-        type: "multi",
+        type: "single",
 
         options: [
 
-            { label: "ちゃんと塗れているか分からない" },
+            { label: "ぜひ使ってみたい" },
 
-            { label: "塗りムラができそう" },
+            { label: "少し使ってみたい" },
 
-            { label: "顔や目に入らないか心配" },
+            { label: "どちらともいえない" },
 
-            { label: "服や髪についてしまいそう" },
+            { label: "あまり使いたいと思わない" },
 
-            { label: "日焼け止めが手についてベタベタしそう" },
-
-            { label: "容器をうまく使えなそう" },
-
-            { label: "衛生面が心配" },
-
-            {
-                label: "特に心配はない",
-                exclusive: true
-            },
-
-            {
-                label: "その他（自由回答）",
-                other: true
-            }
+            { label: "使いたいと思わない" }
 
         ]
 
@@ -678,37 +627,14 @@ const branch2Questions = [
         branch: "②",
 
         title:
-            "日焼け止めを「自分から使ってみたい」と思えるとしたら、何があるといい？",
+            "次のような「塗り方」の日焼け止めがあったら、どれを使ってみたいですか？",
 
         note:
-            "複数回答OK",
+            "最大2つ回答できます。2つ選ぶ場合は、一番目・二番目の順番で選んでください。",
 
-        type: "multi",
+        type: "rank2",
 
-        options: [
-
-            { label: "自分専用のもの" },
-
-            { label: "自分で使いやすい形" },
-
-            { label: "見た目がかわいい・かっこいい" },
-
-            { label: "遊び感覚で使える" },
-
-            { label: "塗る動作が楽しい" },
-
-            { label: "好きな色を選べる" },
-
-            { label: "友達に見せたくなる" },
-
-            { label: "「自分でできた」と感じられる" },
-
-            {
-                label: "その他（自由回答）",
-                other: true
-            }
-
-        ]
+        options: coatingOptions
 
     },
 
@@ -723,26 +649,27 @@ const branch2Questions = [
         branch: "②",
 
         title:
-            "逆に、こんな日焼け止めだったら、子どもは使いたくないと思うものは？",
+            "日焼け止めを選ぶとしたら、どんなことを重視しますか？",
 
-        note:
-            "自由回答欄と選択肢があります。",
-
-        type: "multiText",
+        type: "multi",
 
         options: [
 
-            { label: "操作が難しい" },
+            { label: "塗りやすさ" },
 
-            { label: "ベタベタする" },
+            { label: "楽しく使えること" },
 
-            { label: "見た目が子どもっぽすぎる" },
+            { label: "見た目・デザイン" },
 
-            { label: "大きい" },
+            { label: "肌へのやさしさ" },
 
-            { label: "面倒" },
+            { label: "SPF・PAなどの効果" },
 
-            { label: "塗るのに時間がかかる" }
+            { label: "価格" },
+
+            { label: "落としやすさ" },
+
+            { label: "その他" }
 
         ]
 
@@ -764,7 +691,7 @@ const branch2Questions = [
         note:
             "※いない場合も想像して、回答ください。中身は同じとします。",
 
-        type: "single",
+        type: "multi",
 
         options: [
 
@@ -832,7 +759,6 @@ function getBranch() {
     }
 
     return value.branch;
-
 }
 
 
@@ -865,6 +791,57 @@ function getQuestions() {
     return [
         firstQuestion
     ];
+
+}
+
+
+// =====================================================
+// 「その他」判定
+// =====================================================
+
+function isOtherOption(option) {
+
+    if (!option) {
+        return false;
+    }
+
+    return (
+        option.other === true ||
+        option.label === "その他" ||
+        option.label.includes("その他（自由回答）")
+    );
+
+}
+
+
+// =====================================================
+// HTMLエスケープ
+// =====================================================
+
+function escapeHtml(value) {
+
+    if (
+        value === null ||
+        value === undefined
+    ) {
+
+        return "";
+
+    }
+
+    return String(value)
+        .replace(/&/g, "&amp;")
+        .replace(/</g, "&lt;")
+        .replace(/>/g, "&gt;")
+        .replace(/"/g, "&quot;")
+        .replace(/'/g, "&#039;");
+
+}
+
+
+function escapeAttribute(value) {
+
+    return escapeHtml(value);
 
 }
 
@@ -906,7 +883,9 @@ function renderQuestion() {
     // 戻る
     // -------------------------
 
-    if (currentIndex === 0) {
+    if (
+        currentIndex === 0
+    ) {
 
         backButton.style.display =
             "none";
@@ -948,7 +927,9 @@ function renderQuestion() {
 
     // ①・②表示
 
-    if (question.branch) {
+    if (
+        question.branch
+    ) {
 
         const branchClass =
             question.branch === "①"
@@ -967,7 +948,10 @@ function renderQuestion() {
 
     html += `
 
-        <section class="question">
+        <section
+            class="question"
+            data-question-id="${escapeAttribute(question.id)}"
+        >
 
             <h2>
                 ${escapeHtml(question.title)}
@@ -978,7 +962,9 @@ function renderQuestion() {
 
     // 注釈
 
-    if (question.note) {
+    if (
+        question.note
+    ) {
 
         html += `
             <p class="question-note">
@@ -990,9 +976,9 @@ function renderQuestion() {
     }
 
 
-    // -------------------------
+    // =================================================
     // 選択肢
-    // -------------------------
+    // =================================================
 
     if (
         question.type === "single" ||
@@ -1041,7 +1027,9 @@ function renderQuestion() {
 
                     checked =
                         Array.isArray(selected) &&
-                        selected.includes(option.label);
+                        selected.includes(
+                            option.label
+                        );
 
                 }
 
@@ -1056,10 +1044,14 @@ function renderQuestion() {
 
                     checked =
                         Array.isArray(selected) &&
-                        selected.includes(option.label);
+                        selected.includes(
+                            option.label
+                        );
 
 
-                    if (checked) {
+                    if (
+                        checked
+                    ) {
 
                         rank =
                             selected.indexOf(
@@ -1071,12 +1063,16 @@ function renderQuestion() {
                 }
 
 
+                // -------------------------
+                // 選択肢カード
+                // -------------------------
+
                 html += `
 
                     <label
                         class="
                             option-card
-                            ${option.image ? "has-image" : ""}
+                            ${option.images ? "has-image" : ""}
                         "
                     >
 
@@ -1105,88 +1101,87 @@ function renderQuestion() {
                 `;
 
 
+                // =================================================
                 // 画像
+                // =================================================
 
-              // -------------------------
-// 画像2枚
-// -------------------------
+                if (
+                    option.images &&
+                    option.images.length > 0
+                ) {
 
-if (
-    option.images &&
-    option.images.length > 0
-) {
+                    html += `
 
-    html += `
+                        <div class="option-images">
 
-        <div class="option-images">
-
-    `;
+                    `;
 
 
-    option.images.forEach(
-        (image, imageIndex) => {
+                    option.images.forEach(
+                        (image, imageIndex) => {
 
-            html += `
+                            html += `
 
-                <img
-                    src="${image}"
-                    alt="${escapeAttribute(
-                        option.label
-                    )} ${imageIndex + 1}"
-                    class="option-image"
-                    onerror="
-                        this.style.display='none'
-                    "
-                >
+                                <img
+                                    src="${image}"
+                                    alt="${escapeAttribute(
+                                        option.label
+                                    )} ${imageIndex + 1}"
+                                    class="option-image"
+                                >
 
-            `;
+                            `;
 
-        }
-    );
+                        }
+                    );
 
 
-    html += `
+                    html += `
 
-        </div>
+                        </div>
 
-    `;
+                    `;
 
-}
+                }
 
+
+                // =================================================
+                // 名前・説明
+                // =================================================
 
                 html += `
 
-    <div class="option-information">
+                    <div class="option-information">
 
-        <span class="option-text">
+                        <span class="option-text">
 
-            ${
-                escapeHtml(
-                    option.label
-                )
-            }
+                            ${escapeHtml(
+                                option.label
+                            )}
 
-        </span>
+                        </span>
 
 
-        ${
-            option.description
-                ? `
-                    <span class="option-description">
-                        ${escapeHtml(
+                        ${
                             option.description
-                        )}
-                    </span>
-                `
-                : ""
-        }
+                                ? `
+                                    <span class="option-description">
+                                        ${escapeHtml(
+                                            option.description
+                                        )}
+                                    </span>
+                                `
+                                : ""
+                        }
 
-    </div>
+                    </div>
 
-`;
+                `;
 
 
+                // =================================================
                 // 順番バッジ
+                // =================================================
 
                 if (
                     question.type === "rank2"
@@ -1195,7 +1190,11 @@ if (
                     html += `
 
                         <span
-                            class="rank-badge"
+                            class="rank-badge ${
+                                rank
+                                    ? "show"
+                                    : ""
+                            }"
                             data-rank-for="${
                                 escapeAttribute(
                                     option.label
@@ -1225,19 +1224,49 @@ if (
         `;
 
 
+        // =================================================
         // その他自由回答
+        // 「その他」を選んだときだけ表示
+        // =================================================
 
         if (
+            question.type === "single" ||
             question.type === "multi"
         ) {
 
-            const hasOther =
-                question.options.some(
-                    option => option.other
+            const otherOption =
+                question.options.find(
+                    option =>
+                        isOtherOption(option)
                 );
 
 
-            if (hasOther) {
+            const selectedValue =
+                answers[question.id];
+
+
+            const isSelected =
+                question.type === "single"
+                    ? (
+                        otherOption &&
+                        selectedValue ===
+                            otherOption.label
+                    )
+                    : (
+                        Array.isArray(
+                            selectedValue
+                        ) &&
+                        otherOption &&
+                        selectedValue.includes(
+                            otherOption.label
+                        )
+                    );
+
+
+            if (
+                otherOption &&
+                isSelected
+            ) {
 
                 const otherText =
                     answers[
@@ -1264,9 +1293,9 @@ if (
     }
 
 
-    // -------------------------
+    // =================================================
     // 自由回答
-    // -------------------------
+    // =================================================
 
     if (
         question.type === "text"
@@ -1289,9 +1318,9 @@ if (
     }
 
 
-    // -------------------------
+    // =================================================
     // 自由回答＋選択肢
-    // -------------------------
+    // =================================================
 
     if (
         question.type === "multiText"
@@ -1382,38 +1411,32 @@ if (
         html;
 
 
-    updateRankBadges();
+    // =================================================
+    // b2_q8 の見た目を統一
+    // =================================================
 
-}
+    if (
+        question.id === "b2_q8"
+    ) {
 
+        const title =
+            container.querySelector(
+                ".question h2"
+            );
 
-// =====================================================
-// HTMLエスケープ
-// =====================================================
+        if (
+            title
+        ) {
 
-function escapeHtml(value) {
+            title.style.fontFamily =
+                "inherit";
 
-    if (value === null ||
-        value === undefined) {
+            title.style.fontWeight =
+                "600";
 
-        return "";
+        }
 
     }
-
-
-    return String(value)
-        .replace(/&/g, "&amp;")
-        .replace(/</g, "&lt;")
-        .replace(/>/g, "&gt;")
-        .replace(/"/g, "&quot;")
-        .replace(/'/g, "&#039;");
-
-}
-
-
-function escapeAttribute(value) {
-
-    return escapeHtml(value);
 
 }
 
@@ -1444,9 +1467,9 @@ container.addEventListener(
             questions[currentIndex];
 
 
-        // -------------------------
+        // =================================================
         // 最初の分岐
-        // -------------------------
+        // =================================================
 
         if (
             question.id === "q0"
@@ -1500,6 +1523,10 @@ container.addEventListener(
             );
 
 
+            currentIndex =
+                0;
+
+
             renderQuestion();
 
             return;
@@ -1507,25 +1534,75 @@ container.addEventListener(
         }
 
 
-        // -------------------------
+        // =================================================
         // single
-        // -------------------------
+        // =================================================
 
         if (
             question.type === "single"
         ) {
 
+            const previousValue =
+                answers[question.id];
+
+
             answers[question.id] =
                 input.value;
+
+
+            const selectedOption =
+                question.options.find(
+                    option =>
+                        option.label ===
+                        input.value
+                );
+
+
+            const previousOption =
+                question.options.find(
+                    option =>
+                        option.label ===
+                        previousValue
+                );
+
+
+            // 「その他」の表示・非表示を更新
+
+            if (
+                isOtherOption(
+                    selectedOption
+                ) ||
+                isOtherOption(
+                    previousOption
+                )
+            ) {
+
+                if (
+                    !isOtherOption(
+                        selectedOption
+                    )
+                ) {
+
+                    delete answers[
+                        `${question.id}_other`
+                    ];
+
+                }
+
+
+                renderQuestion();
+
+            }
+
 
             return;
 
         }
 
 
-        // -------------------------
+        // =================================================
         // rank2
-        // -------------------------
+        // =================================================
 
         if (
             question.type === "rank2"
@@ -1580,21 +1657,28 @@ container.addEventListener(
 
             updateRankBadges();
 
+
             return;
 
         }
 
 
-        // -------------------------
+        // =================================================
         // multi
-        // -------------------------
+        // =================================================
 
         if (
             question.type === "multi"
         ) {
 
             let selected =
-                answers[question.id] || [];
+                Array.isArray(
+                    answers[question.id]
+                )
+                    ? [
+                        ...answers[question.id]
+                    ]
+                    : [];
 
 
             const option =
@@ -1605,7 +1689,30 @@ container.addEventListener(
                 );
 
 
-            // 「特にない」系
+            // 変更前に「その他」が選ばれていたか
+
+            const wasOtherSelected =
+                selected.some(
+                    value => {
+
+                        const item =
+                            question.options.find(
+                                candidate =>
+                                    candidate.label ===
+                                    value
+                            );
+
+                        return isOtherOption(
+                            item
+                        );
+
+                    }
+                );
+
+
+            // =================================================
+            // 「特にない」などの排他的選択肢
+            // =================================================
 
             if (
                 option &&
@@ -1640,8 +1747,10 @@ container.addEventListener(
 
             } else {
 
-                // 他の選択肢が選ばれたら
+                // -------------------------------------------------
+                // 通常の選択肢を選んだら
                 // 「特にない」を外す
+                // -------------------------------------------------
 
                 if (
                     input.checked &&
@@ -1656,7 +1765,9 @@ container.addEventListener(
                         );
 
 
-                    if (exclusive) {
+                    if (
+                        exclusive
+                    ) {
 
                         const exclusiveInput =
                             container.querySelector(
@@ -1688,6 +1799,10 @@ container.addEventListener(
                 }
 
 
+                // -------------------------------------------------
+                // 選択
+                // -------------------------------------------------
+
                 if (
                     input.checked
                 ) {
@@ -1704,7 +1819,14 @@ container.addEventListener(
 
                     }
 
-                } else {
+                }
+
+
+                // -------------------------------------------------
+                // 選択解除
+                // -------------------------------------------------
+
+                else {
 
                     selected =
                         selected.filter(
@@ -1722,14 +1844,61 @@ container.addEventListener(
                 selected;
 
 
+            // =================================================
+            // 現在「その他」が選ばれているか
+            // =================================================
+
+            const isOtherSelected =
+                selected.some(
+                    value => {
+
+                        const item =
+                            question.options.find(
+                                candidate =>
+                                    candidate.label ===
+                                    value
+                            );
+
+                        return isOtherOption(
+                            item
+                        );
+
+                    }
+                );
+
+
+            // 「その他」の選択状態が変わった場合だけ
+            // 画面を再描画
+
+            if (
+                wasOtherSelected !==
+                isOtherSelected
+            ) {
+
+                if (
+                    !isOtherSelected
+                ) {
+
+                    delete answers[
+                        `${question.id}_other`
+                    ];
+
+                }
+
+
+                renderQuestion();
+
+            }
+
+
             return;
 
         }
 
 
-        // -------------------------
+        // =================================================
         // multiText
-        // -------------------------
+        // =================================================
 
         if (
             question.type === "multiText"
@@ -1761,7 +1930,9 @@ container.addEventListener(
 
             answers[question.id] =
                 [
-                    ...new Set(selected)
+                    ...new Set(
+                        selected
+                    )
                 ];
 
         }
@@ -1783,9 +1954,12 @@ container.addEventListener(
 
 
         if (
-            target.tagName !== "TEXTAREA"
+            target.tagName !==
+            "TEXTAREA"
         ) {
+
             return;
+
         }
 
 
@@ -1795,6 +1969,8 @@ container.addEventListener(
         const question =
             questions[currentIndex];
 
+
+        // 通常の自由回答
 
         if (
             question.type === "text"
@@ -1806,17 +1982,57 @@ container.addEventListener(
         }
 
 
+        // その他
+
         if (
+            question.type === "single" ||
             question.type === "multi"
         ) {
 
-            answers[
-                `${question.id}_other`
-            ] =
-                target.value;
+            const selected =
+                answers[question.id];
+
+
+            const otherOption =
+                question.options.find(
+                    option =>
+                        isOtherOption(option)
+                );
+
+
+            const isOtherSelected =
+                question.type === "single"
+                    ? (
+                        otherOption &&
+                        selected ===
+                            otherOption.label
+                    )
+                    : (
+                        Array.isArray(
+                            selected
+                        ) &&
+                        otherOption &&
+                        selected.includes(
+                            otherOption.label
+                        )
+                    );
+
+
+            if (
+                isOtherSelected
+            ) {
+
+                answers[
+                    `${question.id}_other`
+                ] =
+                    target.value;
+
+            }
 
         }
 
+
+        // 自由回答＋選択肢
 
         if (
             question.type === "multiText"
@@ -1849,7 +2065,9 @@ function updateRankBadges() {
     if (
         question.type !== "rank2"
     ) {
+
         return;
+
     }
 
 
@@ -1874,9 +2092,12 @@ function updateRankBadges() {
                     );
 
 
-                if (index === -1) {
+                if (
+                    index === -1
+                ) {
 
-                    badge.textContent = "";
+                    badge.textContent =
+                        "";
 
                     badge.classList.remove(
                         "show"
@@ -1906,8 +2127,14 @@ function updateRankBadges() {
 function escapeSelector(value) {
 
     return String(value)
-        .replace(/\\/g, "\\\\")
-        .replace(/"/g, '\\"');
+        .replace(
+            /\\/g,
+            "\\\\"
+        )
+        .replace(
+            /"/g,
+            '\\"'
+        );
 
 }
 
@@ -1929,15 +2156,17 @@ function validateQuestion() {
         answers[question.id];
 
 
-    // -------------------------
+    // =================================================
     // 最初の質問
-    // -------------------------
+    // =================================================
 
     if (
         question.id === "q0"
     ) {
 
-        if (!value) {
+        if (
+            !value
+        ) {
 
             alert(
                 "回答を1つ選択してください。"
@@ -1952,15 +2181,17 @@ function validateQuestion() {
     }
 
 
-    // -------------------------
+    // =================================================
     // single
-    // -------------------------
+    // =================================================
 
     if (
         question.type === "single"
     ) {
 
-        if (!value) {
+        if (
+            !value
+        ) {
 
             alert(
                 "回答を1つ選択してください。"
@@ -1970,12 +2201,49 @@ function validateQuestion() {
 
         }
 
+
+        const selectedOption =
+            question.options.find(
+                option =>
+                    option.label ===
+                    value
+            );
+
+
+        // 「その他」を選んだ場合
+
+        if (
+            isOtherOption(
+                selectedOption
+            )
+        ) {
+
+            const otherText =
+                answers[
+                    `${question.id}_other`
+                ] || "";
+
+
+            if (
+                !otherText.trim()
+            ) {
+
+                alert(
+                    "「その他」を選択した場合は、内容をご記入ください。"
+                );
+
+                return false;
+
+            }
+
+        }
+
     }
 
 
-    // -------------------------
+    // =================================================
     // rank2
-    // -------------------------
+    // =================================================
 
     if (
         question.type === "rank2"
@@ -1997,9 +2265,9 @@ function validateQuestion() {
     }
 
 
-    // -------------------------
+    // =================================================
     // multi
-    // -------------------------
+    // =================================================
 
     if (
         question.type === "multi"
@@ -2019,12 +2287,12 @@ function validateQuestion() {
         }
 
 
-        // その他が選択されている場合
+        // 「その他」が選択されている場合
 
         const otherOption =
             question.options.find(
                 option =>
-                    option.other
+                    isOtherOption(option)
             );
 
 
@@ -2046,7 +2314,7 @@ function validateQuestion() {
             ) {
 
                 alert(
-                    "「その他（自由回答）」を選択した場合は、内容をご記入ください。"
+                    "「その他」を選択した場合は、内容をご記入ください。"
                 );
 
                 return false;
@@ -2058,9 +2326,9 @@ function validateQuestion() {
     }
 
 
-    // -------------------------
+    // =================================================
     // multiText
-    // -------------------------
+    // =================================================
 
     if (
         question.type === "multiText"
@@ -2094,16 +2362,15 @@ function validateQuestion() {
     }
 
 
-    // -------------------------
+    // =================================================
     // 自由回答
-    // -------------------------
+    // =================================================
 
     if (
         question.type === "text"
     ) {
 
-        // Pagesでは「自由回答」なので
-        // 未入力でも進める
+        // 自由回答なので未入力でも進める
 
         return true;
 
@@ -2126,7 +2393,9 @@ nextButton.addEventListener(
         if (
             !validateQuestion()
         ) {
+
             return;
+
         }
 
 
@@ -2134,7 +2403,9 @@ nextButton.addEventListener(
             getQuestions();
 
 
+        // -------------------------------------------------
         // 最後
+        // -------------------------------------------------
 
         if (
             currentIndex ===
@@ -2150,7 +2421,9 @@ nextButton.addEventListener(
 
         currentIndex++;
 
+
         renderQuestion();
+
 
         window.scrollTo({
             top: 0,
@@ -2172,13 +2445,17 @@ backButton.addEventListener(
         if (
             currentIndex <= 0
         ) {
+
             return;
+
         }
 
 
         currentIndex--;
 
+
         renderQuestion();
+
 
         window.scrollTo({
             top: 0,
@@ -2220,8 +2497,11 @@ async function submitSurvey() {
                     },
 
                     body: JSON.stringify({
-                        branch: branch,
-                        answers: answers
+                        branch:
+                            branch,
+
+                        answers:
+                            answers
                     })
                 }
             );
@@ -2250,9 +2530,13 @@ async function submitSurvey() {
             "/thanks";
 
 
-    } catch (error) {
+    } catch (
+        error
+    ) {
 
-        console.error(error);
+        console.error(
+            error
+        );
 
 
         alert(
