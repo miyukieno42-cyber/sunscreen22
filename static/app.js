@@ -1483,23 +1483,65 @@ container.addEventListener(
         // 最初の分岐
         // =================================================
 
-        if (
-            question.id === "q0"
-        ) {
+       // =================================================
+// 最初の分岐
+// =================================================
 
-            const branch =
-                question.options.find(
-                    option =>
-                        option.label ===
-                        input.value
-                );
+if (
+    question.id === "q0"
+) {
 
-
-            answers["q0"] =
-                branch;
+    // 選んだ回答そのものを保存
+    answers["q0"] =
+        input.value;
 
 
-            // 以前のルートの回答を消す
+    // 以前のルートの回答を消す
+
+    branch1Questions.forEach(
+        q => {
+
+            delete answers[q.id];
+
+            delete answers[
+                `${q.id}_other`
+            ];
+
+            delete answers[
+                `${q.id}_free`
+            ];
+
+        }
+    );
+
+
+    branch2Questions.forEach(
+        q => {
+
+            delete answers[q.id];
+
+            delete answers[
+                `${q.id}_other`
+            ];
+
+            delete answers[
+                `${q.id}_free`
+            ];
+
+        }
+    );
+
+
+    // 1問目のまま再表示
+    currentIndex =
+        0;
+
+
+    renderQuestion();
+
+    return;
+
+}
 
             branch1Questions.forEach(
                 q => {
