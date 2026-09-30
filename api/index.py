@@ -41,7 +41,7 @@ def get_db():
     if not DATABASE_URL:
         raise Exception(
             "DATABASE_URL が設定されていません。"
-            "Vercel の Environment Variables に DATABASE_URL を設定してください。"
+            "VercelのEnvironment VariablesにDATABASE_URLを設定してください。"
         )
 
     return psycopg.connect(
@@ -55,10 +55,16 @@ def get_db():
 # =========================================================
 
 def create_table():
+
     conn = get_db()
 
     try:
+
         cursor = conn.cursor()
+
+        # -----------------------------------------
+        # テーブル作成
+        # -----------------------------------------
 
         cursor.execute(
             """
@@ -69,12 +75,20 @@ def create_table():
             """
         )
 
+        # -----------------------------------------
+        # branch列
+        # -----------------------------------------
+
         cursor.execute(
             """
             ALTER TABLE responses
             ADD COLUMN IF NOT EXISTS branch TEXT
             """
         )
+
+        # -----------------------------------------
+        # answers列
+        # -----------------------------------------
 
         cursor.execute(
             """
@@ -84,9 +98,11 @@ def create_table():
         )
 
         conn.commit()
+
         cursor.close()
 
     finally:
+
         conn.close()
 
 
@@ -96,10 +112,11 @@ def create_table():
 
 @app.route("/")
 def index():
-    # ページ表示だけならDB接続しない。
-    # これにより DATABASE_URL の設定ミスがあっても
-    # アンケート画面そのものは表示できる。
-    return render_template("index.html")
+
+    # ページ表示だけならDBには接続しない
+    return render_template(
+        "index.html"
+    )
 
 
 # =========================================================
@@ -108,30 +125,77 @@ def index():
 
 @app.route("/submit", methods=["POST"])
 def submit():
+
     try:
-        data = request.get_json(silent=True)
+
+        # -----------------------------------------
+        # JSON取得
+        # -----------------------------------------
+
+        data = request.get_json(
+            silent=True
+        )
 
         if not data:
+
             return jsonify({
                 "success": False,
                 "message": "回答データを受け取れませんでした。"
             }), 400
 
-        branch = data.get("branch", "")
-        answers = data.get("answers", {})
 
-        if not isinstance(answers, dict):
+        # -----------------------------------------
+        # 分岐
+        # -----------------------------------------
+
+        branch = data.get(
+            "branch",
+            ""
+        )
+
+
+        # -----------------------------------------
+        # 回答
+        # -----------------------------------------
+
+        answers = data.get(
+            "answers",
+            {}
+        )
+
+
+        if not isinstance(
+            answers,
+            dict
+        ):
+
             return jsonify({
                 "success": False,
                 "message": "回答データの形式が正しくありません。"
             }), 400
 
+
+        # -----------------------------------------
+        # テーブル準備
+        # -----------------------------------------
+
         create_table()
+
+
+        # -----------------------------------------
+        # DB接続
+        # -----------------------------------------
 
         conn = get_db()
 
         try:
+
             cursor = conn.cursor()
+
+
+            # -------------------------------------
+            # 保存
+            # -------------------------------------
 
             cursor.execute(
                 """
@@ -156,18 +220,31 @@ def submit():
                 )
             )
 
+
             conn.commit()
+
             cursor.close()
 
         finally:
+
             conn.close()
+
+
+        # -----------------------------------------
+        # 成功
+        # -----------------------------------------
 
         return jsonify({
             "success": True
         })
 
+
     except Exception as e:
-        print("SUBMIT ERROR:", repr(e))
+
+        print(
+            "SUBMIT ERROR:",
+            repr(e)
+        )
 
         return jsonify({
             "success": False,
@@ -181,7 +258,10 @@ def submit():
 
 @app.route("/thanks")
 def thanks():
-    return render_template("thanks.html")
+
+    return render_template(
+        "thanks.html"
+    )
 
 
 # =========================================================
@@ -190,13 +270,26 @@ def thanks():
 
 @app.route("/download_csv")
 def download_csv():
+
     try:
+
+        # -----------------------------------------
+        # テーブル準備
+        # -----------------------------------------
+
         create_table()
+
+
+        # -----------------------------------------
+        # DB接続
+        # -----------------------------------------
 
         conn = get_db()
 
         try:
+
             cursor = conn.cursor()
+
 
             cursor.execute(
                 """
@@ -210,94 +303,217 @@ def download_csv():
                 """
             )
 
+
             rows = cursor.fetchall()
+
             cursor.close()
 
         finally:
+
             conn.close()
 
+
+        # -----------------------------------------
+        # データなし
+        # -----------------------------------------
+
         if not rows:
+
             return "まだ回答データがありません。"
 
+
+        # -----------------------------------------
+        # JSON展開
+        # -----------------------------------------
+
         answer_dicts = []
+
         all_keys = []
 
+
         for row in rows:
+
             answer_json = row[3]
 
+
             if answer_json is None:
+
                 answers = {}
 
-            elif isinstance(answer_json, dict):
+
+            elif isinstance(
+                answer_json,
+                dict
+            ):
+
                 answers = answer_json
 
+
             else:
+
                 try:
-                    answers = json.loads(answer_json)
+
+                    answers = json.loads(
+                        answer_json
+                    )
+
                 except Exception:
+
                     answers = {}
 
-            answer_dicts.append(answers)
+
+            answer_dicts.append(
+                answers
+            )
+
+
+            # -------------------------------------
+            # 質問項目を収集
+            # -------------------------------------
 
             for key in answers.keys():
+
                 if key not in all_keys:
+
                     all_keys.append(key)
 
-        output = io.StringIO(newline="")
-        writer = csv.writer(output)
+
+        # -----------------------------------------
+        # CSV作成
+        # -----------------------------------------
+
+        output = io.StringIO(
+            newline=""
+        )
+
+
+        writer = csv.writer(
+            output
+        )
+
+
+        # -----------------------------------------
+        # ヘッダー
+        # -----------------------------------------
 
         writer.writerow(
             [
                 "ID",
                 "回答日時",
                 "分岐"
-            ] + all_keys
+            ]
+            +
+            all_keys
         )
 
-        for row, answers in zip(rows, answer_dicts):
+
+        # -----------------------------------------
+        # データ
+        # -----------------------------------------
+
+        for row, answers in zip(
+            rows,
+            answer_dicts
+        ):
+
             row_data = [
+
                 row[0],
+
                 row[1],
+
                 row[2]
+
             ]
 
-            for key in all_keys:
-                value = answers.get(key, "")
 
-                if isinstance(value, list):
+            for key in all_keys:
+
+                value = answers.get(
+                    key,
+                    ""
+                )
+
+
+                # ---------------------------------
+                # 配列
+                # ---------------------------------
+
+                if isinstance(
+                    value,
+                    list
+                ):
+
                     value = ", ".join(
                         str(item)
                         for item in value
                     )
 
-                elif isinstance(value, dict):
+
+                # ---------------------------------
+                # 辞書
+                # ---------------------------------
+
+                elif isinstance(
+                    value,
+                    dict
+                ):
+
                     value = json.dumps(
                         value,
                         ensure_ascii=False
                     )
 
-                row_data.append(value)
 
-            writer.writerow(row_data)
+                row_data.append(
+                    value
+                )
 
-        csv_data = "\ufeff" + output.getvalue()
+
+            writer.writerow(
+                row_data
+            )
+
+
+        # -----------------------------------------
+        # CSVレスポンス
+        # -----------------------------------------
+
+        csv_data = (
+            "\ufeff"
+            +
+            output.getvalue()
+        )
+
 
         response = Response(
             csv_data,
             mimetype="text/csv; charset=utf-8"
         )
 
-        response.headers["Content-Disposition"] = (
-            "attachment; filename=child_sunscreen_survey.csv"
+
+        response.headers[
+            "Content-Disposition"
+        ] = (
+            "attachment; "
+            "filename=child_sunscreen_survey.csv"
         )
+
 
         return response
 
+
     except Exception as e:
-        print("CSV ERROR:", repr(e))
+
+        print(
+            "CSV ERROR:",
+            repr(e)
+        )
+
 
         return (
-            "CSVの作成に失敗しました。\n" + str(e),
+            "CSVの作成に失敗しました。\n"
+            + str(e),
             500
         )
 
@@ -307,6 +523,7 @@ def download_csv():
 # =========================================================
 
 if __name__ == "__main__":
+
     app.run(
         host="0.0.0.0",
         port=5000,
