@@ -333,21 +333,21 @@ function escapeAttribute(value) {
 }
 
 const headerTexts = {
+
     start: {
-        theme: "start",
         title: "日焼け止めに関するアンケート",
         subtitle: "まずは、いくつか教えてください。"
     },
-    "①": {theme: "green",
-          title: "お子さんの日焼け止めに<br>関するアンケート",
-          subtitle:
+
+    "①": {
+        title: "お子さんの日焼け止めに<br>関するアンケート",
+        subtitle:
             "現在子育て中の方も、<br>" +
             "子育てを終えた方も、<br>" +
             "ぜひお気軽にお答えください。"
     },
 
     "②": {
-        theme: "pink",
         title: "こどものころと現在の<br>日焼け止めアンケート",
         subtitle:
             "子どものころを思い出しながら<br>" +
@@ -357,11 +357,16 @@ const headerTexts = {
 
 
 function updateHeader() {
+
     const key = getBranch() || "start";
     const text = headerTexts[key];
-    document.body.dataset.theme = text.theme;
-    document.getElementById("survey-title").innerHTML =text.title;
-    document.getElementById("survey-subtitle").innerHTML =text.subtitle;
+
+    document.getElementById("survey-title").innerHTML =
+        text.title;
+
+    document.getElementById("survey-subtitle").innerHTML =
+        text.subtitle;
+}
 }
 // =====================================================
 // 質問表示
@@ -376,7 +381,8 @@ function renderQuestion() {
         return;
     }
 
-
+    updateHeader();
+    
     // -------------------------
     // 進捗
     // -------------------------
