@@ -367,7 +367,7 @@ function updateHeader() {
     document.getElementById("survey-subtitle").innerHTML =
         text.subtitle;
 }
-}
+
 // =====================================================
 // 質問表示
 // =====================================================
