@@ -40,7 +40,8 @@ const firstQuestion =
 // =====================================================
 
 const branch1Questions = [
-    {id: "b1_q1",branch: "①",title: "【子どもの年齢】",type: "single",options: [
+    {id: "b1_q1",branch: "①",title: "【子どもの年齢】",type: "single",
+     options: [
         { label: "0〜2歳" },
         { label: "3〜5歳（未就学）" },
         { label: "小学校低学年" },
@@ -51,7 +52,8 @@ const branch1Questions = [
     ]
     },
 
-    {id: "b1_q2",branch: "①",title:"子どもは日焼け止めは使用していますか（使用していましたか）",type: "single",options: [
+    {id: "b1_q2",branch: "①",title:"子どもは日焼け止めは使用していますか（使用していましたか）",type: "single",
+     options: [
         { label: "よく使用している" },
         { label: "外出時などに使用している" },
         { label: "以前は使用していたが、現在はあまり使用していない" },
@@ -60,31 +62,17 @@ const branch1Questions = [
     ]
     },
 
-    {id: "b1_q3",branch: "①",title:"お子さんが日焼け止めを塗るとき、現在どのように塗っていますか？",
-
-        type: "single",
-
-        options: [
-            { label: "毎回、保護者が塗っている" },
-            {
-                label:
-                    "基本的に保護者が塗り、一部は子どもが塗る"
-            },
-            { label: "子どもが自分で塗っている" },
-            { label: "日によって違う" },
-            { label: "その他" }
-        ]
+    {id: "b1_q3",branch: "①",title:"お子さんが日焼け止めを塗るとき、現在どのように塗っていますか？",type: "single",
+     options: [
+        { label: "毎回、保護者が塗っている" },
+        { label: "基本的に保護者が塗り、一部は子どもが塗る" },
+        { label: "子どもが自分で塗っている" },
+        { label: "日によって違う" },
+        { label: "その他" }
+    ]
     },
 
-
-    {
-        id: "b1_q4",
-        branch: "①",
-
-        title:
-            "自分で日焼け止めを塗ることについてどう思いますか",
-
-        type: "single",
+    {id: "b1_q4",branch: "①",title:"自分で日焼け止めを塗ることについてどう思いますか",type: "single",
 
         options: [
             { label: "できれば自分で塗ってほしい" },
@@ -94,49 +82,17 @@ const branch1Questions = [
             { label: "特に考えたことがない" }
         ]
     },
-
-
-    {
-        id: "b1_q5",
-        branch: "①",
-
-        title:
-            "次のような「塗り方」の日焼け止めがあったら、どれを使ってみたいですか",
-
-        note:
-            "最大2つ回答できます。2つ選ぶ場合は、一番目・二番目の順番で選んでください。",
-
-        type: "rank2",
-
-        options: coatingOptions
+    
+    {id: "b1_q5",branch: "①",title:"次のような「塗り方」の日焼け止めがあったら、どれを使ってみたいですか",
+     note:"最大2つ回答できます。2つ選ぶ場合は、一番目・二番目の順番で選んでください。",type: "rank2",
+     options: coatingOptions
     },
 
-
-    {
-        id: "b1_q6",
-        branch: "①",
-
-        title:
-            "「子どもが自分から塗ってみたい」と思いそうなものは？",
-
-        note:
-            "最大2つ回答できます。2つ選ぶ場合は、一番目・二番目の順番で選んでください。",
-
-        type: "rank2",
-
-        options: coatingOptions
+    {id: "b1_q6",branch: "①",title:"「子どもが自分から塗ってみたい」と思いそうなものは？",note:"最大2つ回答できます。2つ選ぶ場合は、一番目・二番目の順番で選んでください。",type: "rank2",
+     options: coatingOptions
     },
 
-
-    {
-        id: "b1_q7",
-        branch: "①",
-
-        title:
-            "日焼け止めを選ぶとき、重視することは何ですか？",
-
-        type: "multi",
-
+    {id: "b1_q7",branch: "①",title:"日焼け止めを選ぶとき、重視することは何ですか？",type: "multi",
         options: [
             { label: "肌へのやさしさ" },
             { label: "SPF・PAなどの効果" },
@@ -151,15 +107,7 @@ const branch1Questions = [
     },
 
 
-    {
-        id: "b1_q8",
-        branch: "①",
-
-        title:
-            "日焼け止めを子どもに塗るとき、困ることはありますか？",
-
-        type: "multi",
-
+    {id: "b1_q8",branch: "①",title:"日焼け止めを子どもに塗るとき、困ることはありますか？",type: "multi",
         options: [
             { label: "子どもが嫌がる" },
             { label: "子どもが逃げる・動く" },
@@ -174,15 +122,7 @@ const branch1Questions = [
     },
 
 
-    {
-        id: "b1_q9",
-        branch: "①",
-
-        title:
-            "もし子どもが自分で日焼け止めを塗るようになったら、どんなことを期待しますか？",
-
-        type: "multi",
-
+    {id: "b1_q9",branch: "①",title:"もし子どもが自分で日焼け止めを塗るようになったら、どんなことを期待しますか？",type: "multi",
         options: [
             { label: "保護者の負担が減る" },
             { label: "子どもが自分の肌を守る意識を持つ" },
@@ -195,27 +135,8 @@ const branch1Questions = [
     },
 
 
-    {
-        id: "b1_q10",
-        branch: "①",
-
-        title:
-            "子どもが使いたくなる日焼け止めについて、何かアイデアや希望はありますか？",
-
-        type: "text"
-    },
-
-
-    {
-        id: "b1_q11",
-        branch: "①",
-
-        title:
-            "その他、日焼け止めについて伝えたいことがあれば教えてください。",
-
-        type: "text"
-    }
-
+    {id: "b1_q10",branch: "①",title:"子どもが使いたくなる日焼け止めについて、何かアイデアや希望はありますか？",type: "text"},   
+    {id: "b1_q11",branch: "①",title:"その他、日焼け止めについて伝えたいことがあれば教えてください。",type: "text"}
 ];
 
 
@@ -224,16 +145,7 @@ const branch1Questions = [
 // =====================================================
 
 const branch2Questions = [
-
-    {
-        id: "b2_q1",
-        branch: "②",
-
-        title:
-            "あなたの年代を教えてください",
-
-        type: "single",
-
+    {id: "b2_q1",branch: "②",title:"あなたの年代を教えてください",type: "single",
         options: [
             { label: "10代" },
             { label: "20代" },
@@ -245,15 +157,7 @@ const branch2Questions = [
     },
 
 
-    {
-        id: "b2_q2",
-        branch: "②",
-
-        title:
-            "子どもの頃、日焼け止めを使っていましたか？",
-
-        type: "single",
-
+    {id: "b2_q2",branch: "②",title:"子どもの頃、日焼け止めを使っていましたか？",type: "single",
         options: [
             { label: "よく使っていた" },
             { label: "たまに使っていた" },
@@ -264,15 +168,7 @@ const branch2Questions = [
     },
 
 
-    {
-        id: "b2_q3",
-        branch: "②",
-
-        title:
-            "子どもの頃、日焼け止めを塗ることについてどう感じていましたか？",
-
-        type: "multi",
-
+    {id: "b2_q3",branch: "②",title:"子どもの頃、日焼け止めを塗ることについてどう感じていましたか？",type: "multi",
         options: [
             { label: "好きだった" },
             { label: "嫌だった" },
@@ -285,15 +181,7 @@ const branch2Questions = [
     },
 
 
-    {
-        id: "b2_q4",
-        branch: "②",
-
-        title:
-            "子どもの頃、日焼け止めを塗るときに困ったことはありましたか？",
-
-        type: "multi",
-
+    {id: "b2_q4",branch: "②",title:"子どもの頃、日焼け止めを塗るときに困ったことはありましたか？",type: "multi",
         options: [
             { label: "ベタベタする" },
             { label: "塗るのが面倒" },
@@ -308,17 +196,8 @@ const branch2Questions = [
         ]
     },
 
-
-    {
-        id: "b2_q5",
-        branch: "②",
-
-        title:
-            "もし子どもの頃に、日焼け止めを楽しく塗れる商品があったら使ってみたいと思いましたか？",
-
-        type: "single",
-
-        options: [
+    {id: "b2_q5",branch: "②",title:"もし子どもの頃に、日焼け止めを楽しく塗れる商品があったら使ってみたいと思いましたか？",type: "single",
+     options: [
             { label: "ぜひ使ってみたい" },
             { label: "少し使ってみたい" },
             { label: "どちらともいえない" },
@@ -328,31 +207,11 @@ const branch2Questions = [
     },
 
 
-    {
-        id: "b2_q6",
-        branch: "②",
-
-        title:
-            "次のような「塗り方」の日焼け止めがあったら、どれを使ってみたいですか？",
-
-        note:
-            "最大2つ回答できます。2つ選ぶ場合は、一番目・二番目の順番で選んでください。",
-
-        type: "rank2",
-
-        options: coatingOptions
+    {id: "b2_q6",branch: "②",title:"次のような「塗り方」の日焼け止めがあったら、どれを使ってみたいですか？",note:"最大2つ回答できます。2つ選ぶ場合は、一番目・二番目の順番で選んでください。",type: "rank2",
+     options: coatingOptions
     },
 
-
-    {
-        id: "b2_q7",
-        branch: "②",
-
-        title:
-            "日焼け止めを選ぶとしたら、どんなことを重視しますか？",
-
-        type: "multi",
-
+    {id: "b2_q7",branch: "②",title:"日焼け止めを選ぶとしたら、どんなことを重視しますか？",type: "multi",
         options: [
             { label: "塗りやすさ" },
             { label: "楽しく使えること" },
@@ -364,20 +223,8 @@ const branch2Questions = [
             { label: "その他" }
         ]
     },
-
-
-    {
-        id: "b2_q8",
-        branch: "②",
-
-        title:
-            "もし身近な子ども（甥、姪、親戚の子ども、きょうだい、友人のこども）に日焼け止めをプレゼントするなら、どんなものをあげますか",
-
-        note:
-            "※いない場合も想像して、回答ください。中身は同じとします。",
-
-        type: "multi",
-
+    
+    {id: "b2_q8",branch: "②",title:"もし身近な子ども（甥、姪、親戚の子ども、きょうだい、友人のこども）に日焼け止めをプレゼントするなら、どんなものをあげますか",note:"※いない場合も想像して、回答ください。中身は同じとします。",type: "multi",
         options: [
             { label: "自分で塗れる" },
             { label: "遊び感覚で使える" },
@@ -387,7 +234,6 @@ const branch2Questions = [
             { label: "その他" }
         ]
     }
-
 ];
 
 
@@ -427,26 +273,10 @@ const progressFill =
 // =====================================================
 
 function getBranch() {
-
     const value = answers["q0"];
-
-    if (!value) {
-        return null;
-    }
-
-    if (
-        value === "現在している" ||
-        value === "過去にしていた"
-    ) {
-        return "①";
-    }
-
-    if (
-        value === "経験なし"
-    ) {
-        return "②";
-    }
-
+    if (!value) {return null;}
+    if (value === "現在している" || value === "過去にしていた") {return "①";}
+    if (value === "経験なし") {return "②";}
     return null;
 }
 
@@ -456,30 +286,15 @@ function getBranch() {
 // =====================================================
 
 function getQuestions() {
-
     const branch = getBranch();
-
     if (branch === "①") {
-
-        return [
-            firstQuestion,
-            ...branch1Questions
-        ];
-
+        return [firstQuestion, ...branch1Questions];
     }
 
     if (branch === "②") {
-
-        return [
-            firstQuestion,
-            ...branch2Questions
-        ];
-
+        return [firstQuestion, ...branch2Questions];
     }
-
-    return [
-        firstQuestion
-    ];
+    return [firstQuestion];
 }
 
 
@@ -488,16 +303,11 @@ function getQuestions() {
 // =====================================================
 
 function isOtherOption(option) {
-
-    if (!option) {
-        return false;
-    }
-
+    if (!option) {return false;}
     return (
         option.other === true ||
         option.label === "その他" ||
-        option.label.includes("その他（自由回答）")
-    );
+        option.label.includes("その他（自由回答）"));
 }
 
 
@@ -506,14 +316,10 @@ function isOtherOption(option) {
 // =====================================================
 
 function escapeHtml(value) {
-
     if (
         value === null ||
-        value === undefined
-    ) {
-        return "";
-    }
-
+        value === undefined) 
+    {return "";}
     return String(value)
         .replace(/&/g, "&amp;")
         .replace(/</g, "&lt;")
@@ -522,21 +328,49 @@ function escapeHtml(value) {
         .replace(/'/g, "&#039;");
 }
 
-
 function escapeAttribute(value) {
     return escapeHtml(value);
 }
 
+const headerTexts = {
+    start: {
+        theme: "start",
+        title: "日焼け止めに関するアンケート",
+        subtitle: "まずは、いくつか教えてください。"
+    },
+    "①": {theme: "green",
+          title: "お子さんの日焼け止めに<br>関するアンケート",
+          subtitle:
+            "現在子育て中の方も、<br>" +
+            "子育てを終えた方も、<br>" +
+            "ぜひお気軽にお答えください。"
+    },
 
+    "②": {
+        theme: "pink",
+        title: "こどものころと現在の<br>日焼け止めアンケート",
+        subtitle:
+            "子どものころを思い出しながら<br>" +
+            "気軽に答えてください"
+    }
+};
+
+
+function updateHeader() {
+    const key = getBranch() || "start";
+    const text = headerTexts[key];
+    document.body.dataset.theme = text.theme;
+    document.getElementById("survey-title").innerHTML =text.title;
+    document.getElementById("survey-subtitle").innerHTML =text.subtitle;
+}
 // =====================================================
 // 質問表示
 // =====================================================
 
 function renderQuestion() {
-
     const questions = getQuestions();
     const question = questions[currentIndex];
-
+    
     if (!question) {
         console.error("質問が見つかりません:", currentIndex);
         return;
@@ -575,14 +409,8 @@ function renderQuestion() {
     // 次へ / 送信
     // -------------------------
 
-    if (
-        currentIndex ===
-        questions.length - 1
-    ) {
-        nextButton.textContent = "回答を送信";
-    } else {
-        nextButton.textContent = "次へ";
-    }
+    if (currentIndex === questions.length - 1) {nextButton.textContent = "回答を送信";} 
+    else {nextButton.textContent = "次へ";}
 
 
     // -------------------------
@@ -591,44 +419,35 @@ function renderQuestion() {
 
     let html = "";
 
-
     // 分岐ラベル
 
     if (question.branch) {
-
         const branchClass =
             question.branch === "①"
                 ? "branch-green"
                 : "branch-orange";
-
         html += `
-            <div class="branch-label ${branchClass}">
-                ${question.branch}
-            </div>
+        <div class="branch-label ${branchClass}">
+        ${question.branch}
+        </div>
         `;
     }
 
-
     html += `
-        <section
-            class="question"
-            data-question-id="${escapeAttribute(question.id)}"
-        >
-            <h2>
-                ${escapeHtml(question.title)}
-            </h2>
+    <section
+    class="question"
+    data-question-id="${escapeAttribute(question.id)}"
+    >
+    <h2>
+    ${escapeHtml(question.title)}
+    </h2>
     `;
-
-
-    // 注釈
-
+// 注釈
     if (question.note) {
-
         html += `
-            <p class="question-note">
-                ${escapeHtml(question.note)
-                    .replace(/\n/g, "<br>")}
-            </p>
+        <p class="question-note">
+        ${escapeHtml(question.note).replace(/\n/g, "<br>")}
+        </p>
         `;
     }
 
@@ -642,81 +461,60 @@ function renderQuestion() {
         question.type === "multi" ||
         question.type === "rank2"
     ) {
-
         html += `
             <div class="options">
         `;
 
-
-        const selected =
-            answers[question.id];
-
+        const selected = answers[question.id];
 
         question.options.forEach(
             (option, index) => {
-
                 let checked = false;
                 let rank = "";
-
-
                 if (question.type === "single") {
-
                     checked =
                         selected === option.label;
                 }
-
-
                 if (question.type === "multi") {
-
                     checked =
                         Array.isArray(selected) &&
                         selected.includes(option.label);
                 }
 
-
                 if (question.type === "rank2") {
-
                     checked =
                         Array.isArray(selected) &&
                         selected.includes(option.label);
 
                     if (checked) {
-
                         rank =
                             selected.indexOf(option.label) + 1;
                     }
                 }
 
-
                 html += `
-                    <label
-                        class="
-                            option-card
-                            ${option.images ? "has-image" : ""}
-                        "
+                <label
+                class="
+                option-card
+                ${option.images ? "has-image" : ""}
+                "
+                >
+                <input
+                type="${
+                    question.type === "single"
+                    ? "radio"
+                    : "checkbox"
+                }"
+                name="${question.id}"
+                value="${escapeAttribute(
+                    option.label
+                )}"
+                data-index="${index}"
+                ${
+                    checked
+                    ? "checked"
+                    : ""}
                     >
-
-                        <input
-                            type="${
-                                question.type === "single"
-                                    ? "radio"
-                                    : "checkbox"
-                            }"
-
-                            name="${question.id}"
-
-                            value="${escapeAttribute(
-                                option.label
-                            )}"
-
-                            data-index="${index}"
-
-                            ${
-                                checked
-                                    ? "checked"
-                                    : ""
-                            }
-                        >
                 `;
 
 
@@ -730,28 +528,24 @@ function renderQuestion() {
                 ) {
 
                     html += `
-                        <div class="option-images">
+                    <div class="option-images">
                     `;
-
 
                     option.images.forEach(
                         (image, imageIndex) => {
-
                             html += `
                                 <img
-                                    src="${escapeAttribute(image)}"
-                                    alt="${escapeAttribute(
-                                        option.label
-                                    )} ${imageIndex + 1}"
-                                    class="option-image"
-                                    loading="lazy"
-                                    onerror="this.style.display='none'; console.error('画像読み込み失敗:', this.src);"
+                                src="${escapeAttribute(image)}"
+                                alt="${escapeAttribute
+                                       (option.label
+                                       )} ${imageIndex + 1}"
+                                       class="option-image"
+                                       loading="lazy"
+                                       onerror="this.style.display='none'; console.error('画像読み込み失敗:', this.src);"
                                 >
                             `;
-
                         }
                     );
-
 
                     html += `
                         </div>
@@ -762,24 +556,17 @@ function renderQuestion() {
                 // 名前・説明
 
                 html += `
-                    <div class="option-information">
-
-                        <span class="option-text">
-                            ${escapeHtml(option.label)}
-                        </span>
-
-                        ${
-                            option.description
-                                ? `
-                                    <span class="option-description">
-                                        ${escapeHtml(
-                                            option.description
-                                        )}
-                                    </span>
-                                `
-                                : ""
-                        }
-
+                <div class="option-information">
+                <span class="option-text">${escapeHtml(option.label)}
+                </span>${
+                    option.description
+                    ? `
+                    <span class="option-description">
+                    ${escapeHtml(
+                        option.description)}</span>
+                        `
+                    : ""
+                }
                     </div>
                 `;
 
