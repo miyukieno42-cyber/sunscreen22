@@ -2,27 +2,18 @@
 <html lang="ja">
 
 <head>
-
     <meta charset="UTF-8">
-
     <meta
         name="viewport"
         content="width=device-width, initial-scale=1.0"
     >
-
     <title>子どもの日焼け止めに関するアンケート</title>
-
     <link
         rel="stylesheet"
         href="{{ url_for('static', filename='style.css') }}"
     >
-
 </head>
-
-
 <body>
-
-
 <main class="survey-card">
 
 
@@ -31,40 +22,19 @@
     ========================== -->
 
     <header class="survey-header">
-
-        <h1>
-            子どもの日焼け止めに関するアンケート
-        </h1>
-
-
+        <div class="survey-icon">🧴</div>
+        <h1 id="survey-title">日焼け止めに関するアンケート</h1>
+        <p id="survey-subtitle" class="survey-subtitle">お気軽に答えてください</p>
         <div class="progress-area">
-
             <div class="progress-text">
-
-                <span id="progress-current">
-                    1
-                </span>
-
+                <span id="progress-current">1</span>
                 /
-
-                <span id="progress-total">
-                    1
-                </span>
-
+                <span id="progress-total">1</span>
             </div>
-
-
             <div class="progress-bar">
-
-                <div
-                    id="progress-fill"
-                    class="progress-fill"
-                ></div>
-
+                <div id="progress-fill" class="progress-fill"></div>
             </div>
-
         </div>
-
     </header>
 
 
@@ -74,41 +44,16 @@
 
     <div id="question-container"></div>
 
-
     <!-- =========================
          ボタン
     ========================== -->
 
     <div class="button-area">
-
-        <button
-            type="button"
-            id="back-button"
-            class="back-button"
-        >
-            戻る
-        </button>
-
-
-        <button
-            type="button"
-            id="next-button"
-            class="next-button"
-        >
-            次へ
-        </button>
-
+        <button type="button" id="back-button" class="back-button">戻る</button>
+        <button type="button" id="next-button" class="next-button">次へ</button>
     </div>
-
-
 </main>
 
-
-<script
-    src="{{ url_for('static', filename='app.js') }}"
-></script>
-
-
+<script src="{{ url_for('static', filename='app.js') }}"></script>
 </body>
-
 </html>
