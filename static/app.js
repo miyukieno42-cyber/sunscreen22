@@ -25,7 +25,17 @@ const coatingOptions = [
 // =====================================================
 // 最初の質問
 // =====================================================
-
+const genderQuestion = {
+    id: "gender",
+    title: "あなたの性別を教えてください",
+    note: "一つ回答",
+    type: "single",
+    options: [
+        { label: "女性" },
+        { label: "男性" },
+        { label: "回答しない" }
+    ]
+};
 const firstQuestion = 
 {id: "q0",title: "現在子育てはしていますか？",note: "一つ回答",type: "single",options: [
     {label: "現在している",branch: "①"},
@@ -288,15 +298,14 @@ function getBranch() {
 function getQuestions() {
     const branch = getBranch();
     if (branch === "①") {
-        return [firstQuestion, ...branch1Questions];
+        return [genderQuestion, firstQuestion, ...branch1Questions];
     }
 
     if (branch === "②") {
-        return [firstQuestion, ...branch2Questions];
+        return [genderQuestion, firstQuestion, ...branch2Questions];
     }
-    return [firstQuestion];
+    return [genderQuestion, firstQuestion];
 }
-
 
 // =====================================================
 // 「その他」判定
@@ -882,7 +891,7 @@ container.addEventListener(
             );
 
 
-            currentIndex = 0;
+            currentIndex = 1;
 
             renderQuestion();
 
