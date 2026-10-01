@@ -361,11 +361,19 @@ function updateHeader() {
     const key = getBranch() || "start";
     const text = headerTexts[key];
 
-    document.getElementById("survey-title").innerHTML =
-        text.title;
+    const titleElement =
+        document.getElementById("survey-title");
 
-    document.getElementById("survey-subtitle").innerHTML =
-        text.subtitle;
+    const subtitleElement =
+        document.getElementById("survey-subtitle");
+
+    if (titleElement) {
+        titleElement.innerHTML = text.title;
+    }
+
+    if (subtitleElement) {
+        subtitleElement.innerHTML = text.subtitle;
+    }
 }
 
 // =====================================================
