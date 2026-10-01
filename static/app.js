@@ -7,9 +7,7 @@
 // 画像
 // -----------------------------------------------------
 
-const imagePath = (filename) => {
-    return `/static/images/${filename}`;
-};
+const imagePath = (filename) => {return `/static/images/${filename}`;};
 
 
 // -----------------------------------------------------
@@ -17,58 +15,10 @@ const imagePath = (filename) => {
 // -----------------------------------------------------
 
 const coatingOptions = [
-
-    {
-        label: "手で塗る",
-
-        description:
-            "チューブ式で、押して、手に出して塗る",
-
-        images: [
-            imagePath("image1-1.png"),
-            imagePath("image1-2.png")
-        ]
-    },
-
-
-    {
-        label: "ローラー",
-
-        description:
-            "本体に直接日焼け止めが付いていて、コロコロするだけで塗れる",
-
-        images: [
-            imagePath("image2-1.png"),
-            imagePath("image2-2.png")
-        ]
-    },
-
-
-    {
-        label: "筆・ブラシ",
-
-        description:
-            "胴体を押すとブラシ部分に日焼け止めが出てきて、描くように塗れる",
-
-        images: [
-            imagePath("image3-1.png"),
-            imagePath("image3-2.png")
-        ]
-    },
-
-
-    {
-        label: "スポンジ",
-
-        description:
-            "星型の部分に日焼け止めが付いていて、ぽんぽんと凹むので、凹むたびに日焼け止めが出てきて、スタンプのように塗れる",
-
-        images: [
-            imagePath("image4-1.png"),
-            imagePath("image4-2.png")
-        ]
-    }
-
+    {label: "手で塗る",description:"チューブ式で、押して、手に出して塗る",images:[imagePath("image1-1.png"),imagePath("image1-2.png")]},
+    {label: "ローラー",description:"本体に直接日焼け止めが付いていて、コロコロするだけで塗れる",images: [imagePath("image2-1.png"),imagePath("image2-2.png")]},
+    {label: "筆・ブラシ",description:"胴体を押すとブラシ部分に日焼け止めが出てきて、描くように塗れる",images: [imagePath("image3-1.png"),imagePath("image3-2.png")]},
+    {label: "スポンジ",description:"星型の部分に日焼け止めが付いていて、ぽんぽんと凹むので、凹むたびに日焼け止めが出てきて、スタンプのように塗れる",images: [imagePath("image4-1.png"),imagePath("image4-2.png")]}
 ];
 
 
@@ -76,35 +26,12 @@ const coatingOptions = [
 // 最初の質問
 // =====================================================
 
-const firstQuestion = {
-
-    id: "q0",
-
-    title: "現在子育てはしていますか？",
-
-    note: "一つ回答",
-
-    type: "single",
-
-    options: [
-
-        {
-            label: "現在している",
-            branch: "①"
-        },
-
-        {
-            label: "過去にしていた",
-            branch: "①"
-        },
-
-        {
-            label: "経験なし",
-            branch: "②"
-        }
-
+const firstQuestion = 
+{id: "q0",title: "現在子育てはしていますか？",note: "一つ回答",type: "single",options: [
+    {label: "現在している",branch: "①"},
+    {label: "過去にしていた",branch: "①"},
+    {label: "経験なし",branch: "②"}
     ]
-
 };
 
 
@@ -113,53 +40,27 @@ const firstQuestion = {
 // =====================================================
 
 const branch1Questions = [
-
-    {
-        id: "b1_q1",
-        branch: "①",
-        title: "【子どもの年齢】",
-        type: "single",
-
-        options: [
-            { label: "0〜2歳" },
-            { label: "3〜5歳（未就学）" },
-            { label: "小学校低学年" },
-            { label: "小学校高学年" },
-            { label: "中学生" },
-            { label: "高校生以上" },
-            { label: "その他" }
-        ]
+    {id: "b1_q1",branch: "①",title: "【子どもの年齢】",type: "single",options: [
+        { label: "0〜2歳" },
+        { label: "3〜5歳（未就学）" },
+        { label: "小学校低学年" },
+        { label: "小学校高学年" },
+        { label: "中学生" },
+        { label: "高校生以上" },
+        { label: "その他" }
+    ]
     },
 
-
-    {
-        id: "b1_q2",
-        branch: "①",
-
-        title:
-            "子どもは日焼け止めは使用していますか（使用していましたか）",
-
-        type: "single",
-
-        options: [
-            { label: "よく使用している" },
-            { label: "外出時などに使用している" },
-            {
-                label:
-                    "以前は使用していたが、現在はあまり使用していない"
-            },
-            { label: "使用していない" },
-            { label: "覚えていない" }
-        ]
+    {id: "b1_q2",branch: "①",title:"子どもは日焼け止めは使用していますか（使用していましたか）",type: "single",options: [
+        { label: "よく使用している" },
+        { label: "外出時などに使用している" },
+        { label: "以前は使用していたが、現在はあまり使用していない" },
+        { label: "使用していない" },
+        { label: "覚えていない" }
+    ]
     },
 
-
-    {
-        id: "b1_q3",
-        branch: "①",
-
-        title:
-            "お子さんが日焼け止めを塗るとき、現在どのように塗っていますか？",
+    {id: "b1_q3",branch: "①",title:"お子さんが日焼け止めを塗るとき、現在どのように塗っていますか？",
 
         type: "single",
 
